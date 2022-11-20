@@ -44,9 +44,7 @@ public class SelectIngredients {
     @FXML
     void onExitDone(MouseEvent event) {
         if (done.getText().contentEquals("Done")) {
-            done.setStyle("-fx-background-color:rgb(0, 123, 255);" +
-                    "-fx-padding: 10px;-fx-border-radius:25px;\n" +
-                    "-fx-color:rgb(0, 0, 0);-fx-font-weight:400;-fx-font-size:16px;");
+            done.setStyle("-fx-background-color: #3ACECE;-fx-border-radius:25px;");
 
         }
     }
@@ -54,9 +52,7 @@ public class SelectIngredients {
     @FXML
     void onHoverDone(MouseEvent event) {
         if (done.getText().contentEquals("Done")) {
-            done.setStyle("-fx-background-color: #0062cc;" +
-                    "-fx-padding: 10px;-fx-border-radius:25px;\n" +
-                    "-fx-color:rgb(0, 0, 0);-fx-font-weight:400;-fx-font-size:16px;");
+            done.setStyle("-fx-background-color: #0062cc;-fx-border-radius:25px;");
         }
 
     }

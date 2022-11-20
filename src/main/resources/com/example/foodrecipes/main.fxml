@@ -29,7 +29,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #4DAFE7; -fx-border-width: 1px; -fx-border-color: #4DAFE7; -fx-border-radius: 10px;" text="Login" textFill="WHITE">
+            <Button fx:id="login_btn" mnemonicParsing="false" onAction="#onOpenLogin" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #4DAFE7; -fx-border-width: 1px; -fx-border-color: #4DAFE7; -fx-border-radius: 10px;" text="Login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -57,7 +57,7 @@
                      </image>
                   </ImageView>
                   <VBox prefHeight="200.0" prefWidth="100.0" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: #3ACECE;" text="Find Recipes" textFill="WHITE" translateX="660.0" translateY="-20.0">
+                  <Button fx:id="find_btn" mnemonicParsing="false" onAction="#onFindClicked" style="-fx-background-color: #3ACECE;" text="Find Recipes" textFill="WHITE" translateX="660.0" translateY="-20.0">
                      <padding>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </padding>

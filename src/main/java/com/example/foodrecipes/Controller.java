@@ -19,6 +19,31 @@ public class Controller {
 
     @FXML
     private Button add;
+    @FXML
+    private Button login_btn;
+    @FXML
+    private Button find_btn;
+
+    @FXML
+    void onFindClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onOpenLogin(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent parent = fxmlLoader.load();
+        SelectIngredients dialogController = fxmlLoader.getController();
+
+        Scene scene = new Scene(parent, 800, 570);
+        Stage stage = new Stage();
+        stage.setMinWidth(600);
+        stage.setMinHeight(600);
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
 
     @FXML
     void addIngredient(ActionEvent event) throws IOException {
