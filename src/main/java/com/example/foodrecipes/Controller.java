@@ -33,7 +33,6 @@ public class Controller {
     void onOpenLogin(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent parent = fxmlLoader.load();
-        SelectIngredients dialogController = fxmlLoader.getController();
 
         Scene scene = new Scene(parent, 800, 570);
         Stage stage = new Stage();
