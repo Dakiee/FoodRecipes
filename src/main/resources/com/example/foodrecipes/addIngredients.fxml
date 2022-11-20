@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.foodrecipes.SelectIngredients">
    <top>
-      <Label prefHeight="51.2" prefWidth="600.0" style="-fx-padding: 10px; -fx-font-size: 20px; -fx-background-color: #E58412;" text="Select your ingredients:" textFill="WHITE" BorderPane.alignment="CENTER">
+      <Label prefHeight="51.0" prefWidth="700.0" style="-fx-padding: 10px; -fx-font-size: 20px; -fx-background-color: #E58412;" text="Select your ingredients:" textFill="WHITE" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -30,7 +29,7 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT">
          <children>
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="96.0" style="-fx-background-color: #3ACECE;" text="Done" textFill="WHITE">
+            <Button fx:id="done" mnemonicParsing="false" onAction="#onDoneClicked" onMouseEntered="#onHoverDone" onMouseExited="#onExitDone" prefHeight="35.0" prefWidth="96.0" style="-fx-background-color: #3ACECE;" text="Done" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
