@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.foodrecipes.LoginController">
    <children>
       <HBox prefHeight="0.0" style="-fx-border-color: lightgray; -fx-border-radius: 15;">
          <StackPane.margin>
@@ -32,24 +31,25 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="530.0" prefWidth="368.0" spacing="15.0" style="-fx-background-color: lightgray;">
                      <children>
-                        <Label text="Login" translateY="-70.0">
+                        <Label text="Login" translateY="-30.0">
                            <font>
                               <Font name="Arial Bold" size="60.0" />
                            </font>
                         </Label>
+                        <Label fx:id="wrongLogin" />
                         <Label text="Username:" translateX="-80.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField maxWidth="250.0" prefHeight="35.0" translateX="-5.0" />
+                        <TextField fx:id="tfUsername" maxWidth="250.0" prefHeight="35.0" promptText="Username" translateX="-5.0" />
                         <Label text="Password:" translateX="-80.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField maxWidth="250.0" prefHeight="35.0" translateX="-5.0" />
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #4DAFE7;" text="Sign in" translateX="60.0" translateY="10.0">
+                        <TextField fx:id="tfPassword" maxWidth="250.0" prefHeight="35.0" promptText="Password" translateX="-5.0" />
+                        <Button fx:id="btnSignin" maxHeight="1.7976931348623157E308" maxWidth="100.0" mnemonicParsing="false" onAction="#btnSign" style="-fx-background-color: #4DAFE7;" text="Sign in" translateX="60.0" translateY="10.0">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
