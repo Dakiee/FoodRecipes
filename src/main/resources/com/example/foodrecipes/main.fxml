@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -21,7 +20,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" style="-fx-background-color: E58412;" text="Favorites" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#test" prefHeight="32.0" prefWidth="79.0" style="-fx-background-color: E58412;" text="Favorites" textFill="WHITE">
                <HBox.margin>
                   <Insets right="20.0" top="18.0" />
                </HBox.margin>
@@ -67,29 +66,30 @@
                   </Button>
                </children>
             </VBox>
+            <HBox fx:id="ingredients" maxHeight="0.0" maxWidth="807.0" prefHeight="0.0" prefWidth="638.0" />
          </children>
       </HBox>
    </bottom>
    <center>
-      <HBox prefHeight="334.0" prefWidth="590.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="87.0" prefWidth="747.0" style="-fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 10px;" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane prefHeight="105.0" prefWidth="797.0" style="-fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 10px;">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="768.0">
-                     <children>
-                        <Button fx:id="add" mnemonicParsing="false" onAction="#addIngredient" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: #3ACECE;" text="Add an ingredient" textFill="WHITE" AnchorPane.leftAnchor="630.0" AnchorPane.topAnchor="36.0">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-              </content>
+            <ScrollPane fx:id="scrollPane" maxHeight="80.0" prefHeight="70.0" prefWidth="697.0" style="-fx-border-radius: 10px;">
                <HBox.margin>
-                  <Insets left="10.0" right="10.0" top="10.0" />
+                  <Insets />
                </HBox.margin>
             </ScrollPane>
+            <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#addIngredient" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: #3ACECE;" text="Add an ingredient" textFill="WHITE" translateX="-10.0" translateY="40.0" HBox.hgrow="NEVER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
          </children>
+         <BorderPane.margin>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
       </HBox>
    </center>
 </BorderPane>
