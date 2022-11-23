@@ -61,7 +61,7 @@
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label style="-fx-text-fill: blue;" text="Sign Up" translateX="54.0" translateY="30.0">
+                              <Label fx:id="signUp" onMouseClicked="#createAccountForm" style="-fx-text-fill: blue;" text="Sign Up" translateX="54.0" translateY="30.0">
                                  <font>
                                     <Font name="Arial Bold" size="16.0" />
                                  </font>
