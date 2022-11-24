@@ -47,7 +47,7 @@ public class RegisterController{
         String username = tfUsername.getText();
         String password = setPasswordField.getText();
 
-        String insertFields = "INSERT INTO user_account(username, PASSWORD) VALUES ('";
+        String insertFields = "INSERT INTO users(username, PASSWORD) VALUES ('";
         String insertValues = username + "','" + password + "')";
         String insertToRegister = insertFields + insertValues;
 
