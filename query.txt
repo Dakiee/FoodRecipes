@@ -1,5 +1,6 @@
 CREATE TABLE ingredients(
     ingredientsId int NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
     type varchar(100),
     origin varchar(100),
     PRIMARY KEY(ingredientsId)
@@ -32,3 +33,63 @@ CREATE TABLE users(
     PRIMARY KEY(UserID), 
     FOREIGN KEY (favId) REFERENCES favorites(favId) 
 );
+
+INSERT INTO ingredients(name , type , origin) VALUES("BBQ sause","","");
+INSERT INTO ingredients(name , type , origin) VALUES("bacon","","");
+INSERT INTO ingredients(name , type , origin) VALUES("basil","","");
+INSERT INTO ingredients(name , type , origin) VALUES("beans","","");
+INSERT INTO ingredients(name , type , origin) VALUES("beef","","");
+INSERT INTO ingredients(name , type , origin) VALUES("berry","","");
+INSERT INTO ingredients(name , type , origin) VALUES("broth","","");
+INSERT INTO ingredients(name , type , origin) VALUES("brussels sprouts","","");
+INSERT INTO ingredients(name , type , origin) VALUES("buckwheat","","");
+INSERT INTO ingredients(name , type , origin) VALUES("butter","","");
+INSERT INTO ingredients(name , type , origin) VALUES("cabbage","","");
+INSERT INTO ingredients(name , type , origin) VALUES("capers","","");
+INSERT INTO ingredients(name , type , origin) VALUES("carrot","","");
+INSERT INTO ingredients(name , type , origin) VALUES("cheese","","");
+INSERT INTO ingredients(name , type , origin) VALUES("chicken","","");
+INSERT INTO ingredients(name , type , origin) VALUES("chickpeas","","");
+INSERT INTO ingredients(name , type , origin) VALUES("chocolate","","");
+INSERT INTO ingredients(name , type , origin) VALUES("cocoa","","");
+INSERT INTO ingredients(name , type , origin) VALUES("couscous","","");
+INSERT INTO ingredients(name , type , origin) VALUES("cucumber","","");
+INSERT INTO ingredients(name , type , origin) VALUES("dill","","");
+INSERT INTO ingredients(name , type , origin) VALUES("dough","","");
+INSERT INTO ingredients(name , type , origin) VALUES("eggs","","");
+INSERT INTO ingredients(name , type , origin) VALUES("fish","","");
+INSERT INTO ingredients(name , type , origin) VALUES("flour","","");
+INSERT INTO ingredients(name , type , origin) VALUES("garlic","","");
+INSERT INTO ingredients(name , type , origin) VALUES("ginger","","");
+INSERT INTO ingredients(name , type , origin) VALUES("gnocchi","","");
+INSERT INTO ingredients(name , type , origin) VALUES("ham","","");
+INSERT INTO ingredients(name , type , origin) VALUES("kale","","");
+INSERT INTO ingredients(name , type , origin) VALUES("lemon","","");
+INSERT INTO ingredients(name , type , origin) VALUES("lentils","","");
+INSERT INTO ingredients(name , type , origin) VALUES("milk","","");
+INSERT INTO ingredients(name , type , origin) VALUES("mustard","","");
+INSERT INTO ingredients(name , type , origin) VALUES("noodles","","");
+INSERT INTO ingredients(name , type , origin) VALUES("nuts","","");
+INSERT INTO ingredients(name , type , origin) VALUES("olives","","");
+INSERT INTO ingredients(name , type , origin) VALUES("onion","","");
+INSERT INTO ingredients(name , type , origin) VALUES("parsley","","");
+INSERT INTO ingredients(name , type , origin) VALUES("parsnips","","");
+INSERT INTO ingredients(name , type , origin) VALUES("pasta","","");
+INSERT INTO ingredients(name , type , origin) VALUES("pastry","","");
+INSERT INTO ingredients(name , type , origin) VALUES("peanut","","");
+INSERT INTO ingredients(name , type , origin) VALUES("peas","","");
+INSERT INTO ingredients(name , type , origin) VALUES("pepper","","");
+INSERT INTO ingredients(name , type , origin) VALUES("potatoes","","");
+INSERT INTO ingredients(name , type , origin) VALUES("quinoa","","");
+INSERT INTO ingredients(name , type , origin) VALUES("rice","","");
+INSERT INTO ingredients(name , type , origin) VALUES("salmon","","");
+INSERT INTO ingredients(name , type , origin) VALUES("sardine","","");
+INSERT INTO ingredients(name , type , origin) VALUES("sausage","","");
+INSERT INTO ingredients(name , type , origin) VALUES("soy sauce","","");
+INSERT INTO ingredients(name , type , origin) VALUES("starch","","");
+INSERT INTO ingredients(name , type , origin) VALUES("sugar","","");
+INSERT INTO ingredients(name , type , origin) VALUES("toast","","");
+INSERT INTO ingredients(name , type , origin) VALUES("tomato","","");
+INSERT INTO ingredients(name , type , origin) VALUES("tuna","","");
+INSERT INTO ingredients(name , type , origin) VALUES("yeast","","");
+INSERT INTO ingredients(name , type , origin) VALUES("yoghurt","","");
