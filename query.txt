@@ -1,5 +1,6 @@
 CREATE TABLE ingredients(
     ingredientsId int NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
     type varchar(100),
     origin varchar(100),
     PRIMARY KEY(ingredientsId)
@@ -9,7 +10,7 @@ CREATE TABLE Recipes(
     RecipeId int NOT NULL AUTO_INCREMENT, 
     RecipeName varchar(100) NOT NULL, 
     CookTime varchar(100), 
-    ingredientsId int, 
+    ingredientsId int,
     PRIMARY KEY(RecipeId), 
     FOREIGN KEY (ingredientsId) 
     REFERENCES ingredients(ingredientsId), 
