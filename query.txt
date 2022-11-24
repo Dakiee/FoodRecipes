@@ -9,7 +9,8 @@ CREATE TABLE ingredients(
 CREATE TABLE Recipes( 
     RecipeId int NOT NULL AUTO_INCREMENT, 
     RecipeName varchar(100) NOT NULL, 
-    CookTime varchar(100), 
+    CookTime varchar(100),
+    ingIds varchar(100),
     ingredientsId int,
     PRIMARY KEY(RecipeId), 
     FOREIGN KEY (ingredientsId) 
