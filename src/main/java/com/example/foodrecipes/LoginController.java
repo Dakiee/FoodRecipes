@@ -68,15 +68,14 @@ public class LoginController {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Register.fxml"));
             Parent root = fxmlLoader.load();
+//            primaryStage.close();
 
-            Scene scene = new Scene(root, 800, 570);
-            Stage stage = new Stage();
-            stage.setMinWidth(600);
-            stage.setMinHeight(600);
+            Scene scene = new Scene(root, 800, 545);
+            Stage newStage  = new Stage();
 
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.showAndWait();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.setScene(scene);
+            newStage.showAndWait();
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
