@@ -24,7 +24,7 @@ public class SelectIngredients {
 
     @FXML
     private FlowPane allIngredients;
-    private ArrayList<Node> selected = new ArrayList<>();
+    private final ArrayList<Node> selected = new ArrayList<>();
     @FXML
     private Button done;
 
@@ -42,7 +42,7 @@ public class SelectIngredients {
     }
 
     @FXML
-    void onExitDone(MouseEvent event) {
+    void onExitDone() {
         if (done.getText().contentEquals("Done")) {
             done.setStyle("-fx-background-color: #3ACECE;-fx-border-radius:25px;");
 
@@ -50,30 +50,27 @@ public class SelectIngredients {
     }
 
     @FXML
-    void onHoverDone(MouseEvent event) {
+    void onHoverDone() {
         if (done.getText().contentEquals("Done")) {
             done.setStyle("-fx-background-color: #0062cc;-fx-border-radius:25px;");
         }
 
     }
-    public EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent e) {
-            Node hbox = (Node)e.getSource();
-            if (selected.contains(hbox)) {
-                //System.out.println(e.getSource());
-                hbox.setStyle("-fx-border:1px;-fx-border-color:lightgray;-fx-border-radius:10px;" +
-                        "-fx-background-color:white;");
-                selected.remove(hbox);
-            } else {
-                hbox.setStyle("-fx-border:1px;-fx-border-color: #E58412;-fx-border-radius:10px;" +
-                        "-fx-background-color:white;");
-                selected.add(hbox);
-            }
-
-
-            // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
+    public EventHandler<MouseEvent> eventHandler = e -> {
+        Node hbox = (Node)e.getSource();
+        if (selected.contains(hbox)) {
+            //System.out.println(e.getSource());
+            hbox.setStyle("-fx-border:1px;-fx-border-color:lightgray;-fx-border-radius:10px;" +
+                    "-fx-background-color:white;");
+            selected.remove(hbox);
+        } else {
+            hbox.setStyle("-fx-border:1px;-fx-border-color: #E58412;-fx-border-radius:10px;" +
+                    "-fx-background-color:white;");
+            selected.add(hbox);
         }
+
+
+        // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
     };
     public EventHandler getEventHandler(){
         return eventHandler;
@@ -83,7 +80,7 @@ public class SelectIngredients {
         ArrayList<String> ingredients;
         //        ingredients.add("BBQ sause, bacon, basil, beans, beef, berry, broth, brussels sprouts, buckwheat, butter, cabbage, capers, carrot, cheese, chicken, chickpeas, chocolate, cocoa, couscous, cucumber, dill, dough, eggs, fish, flour, garlic, ginger, gnocchi, ham, kale, lemon, lentils, milk, mustard, noodles, nuts, olives, onion, parsley, parsnips, pasta, pastry, peanut, peas, pepper, potatoes, quinoa, rice, salmon, sardine, sausage, soy sauce, starch, sugar, toast, tomato, tuna, yeast, yoghurt");
         String str ="BBQ sause, bacon, basil, beans, beef, berry, broth, brussels sprouts, buckwheat, butter, cabbage, capers, carrot, cheese, chicken, chickpeas, chocolate, cocoa, couscous, cucumber, dill, dough, eggs, fish, flour, garlic, ginger, gnocchi, ham, kale, lemon, lentils, milk, mustard, noodles, nuts, olives, onion, parsley, parsnips, pasta, pastry, peanut, peas, pepper, potatoes, quinoa, rice, salmon, sardine, sausage, soy sauce, starch, sugar, toast, tomato, tuna, yeast, yoghurt";
-        ingredients = new ArrayList<String>(List.of(str.split(", ")));
+        ingredients = new ArrayList<>(List.of(str.split(", ")));
 
         Collections.sort(ingredients);
 //        System.out.println(ingredients);
