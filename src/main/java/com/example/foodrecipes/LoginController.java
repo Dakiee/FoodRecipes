@@ -49,7 +49,6 @@ public class LoginController {
         try{
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
-
             while(queryResult.next()){
                 if(queryResult.getInt(1) == 1){
                     wrongLogin.setText("yes");

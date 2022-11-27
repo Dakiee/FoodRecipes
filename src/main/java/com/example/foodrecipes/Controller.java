@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +15,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     @FXML
@@ -38,6 +41,52 @@ public class Controller {
     }
     @FXML
     void onFindClicked(ActionEvent event) {
+        if(!(selected == null || selected.isEmpty())) {
+            DataBaseConnection connectNow = new DataBaseConnection();
+            Connection connectDB = connectNow.getConnection();
+            StringBuffer sb = new StringBuffer();
+            for (Node obj : selected) {
+//            sb.append(obj.getId() + " ");
+
+                String verifyLogin = "SELECT ingredientsId FROM ingredients WHERE name =  '" + obj.getId() + "'";
+                try {
+                    Statement statement = connectDB.createStatement();
+                    ResultSet queryResult = statement.executeQuery(verifyLogin);
+                    while (queryResult.next()) {
+                        sb.append(queryResult.getInt(1) + " ");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    e.getCause();
+                }
+            }
+            ArrayList<String> cond = new ArrayList<>(List.of(sb.toString().split(" ")));
+            StringBuffer buf = new StringBuffer();
+
+
+            for (int i = 0; i < cond.size(); i++) {
+                if(i == cond.size()-1)
+                    buf.append("ingIds LIKE '%" + cond.get(i) + "%'");
+                else
+                    buf.append("ingIds LIKE '%" + cond.get(i) + "%' OR ");
+            }
+            System.out.println(buf);
+
+
+            String food = "SELECT RecipeName FROM recipes WHERE " + buf;
+            System.out.println(food);
+            try {
+                Statement statement = connectDB.createStatement();
+                ResultSet queryResult = statement.executeQuery(food);
+                while (queryResult.next()) {
+                    System.out.println( (queryResult.getObject(1)));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+            }
+            System.out.println(sb);
+        }
 
     }
     ArrayList<Node> selected;
@@ -164,3 +213,5 @@ public class Controller {
         return temporary;
     }
 }
+
+
