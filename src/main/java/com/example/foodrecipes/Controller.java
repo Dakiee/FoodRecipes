@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -160,8 +162,8 @@ public class Controller {
         for (Node ing : selected) {
 
             String id = ing.getId();
-
-
+            HBox test = (HBox) ing;
+            test.setMinWidth(100);
             if (!isInList(id)) {
 //                ing.minWidth(300);
 //                ing.prefWidth(300);
@@ -170,11 +172,11 @@ public class Controller {
 
 
 //                comp.addUserIngredient(ing.getId());
-                ing.addEventFilter(MouseEvent.MOUSE_ENTERED,mouseEnter);
-                ing.addEventFilter(MouseEvent.MOUSE_EXITED,mouseExit);
-                ing.addEventFilter(MouseEvent.MOUSE_CLICKED,mouseClick);
+                test.addEventFilter(MouseEvent.MOUSE_ENTERED,mouseEnter);
+                test.addEventFilter(MouseEvent.MOUSE_EXITED,mouseExit);
+                test.addEventFilter(MouseEvent.MOUSE_CLICKED,mouseClick);
 
-                ingredients.getChildren().add(ing);
+                ingredients.getChildren().add(test);
 
             } else System.out.println("Item is in list");
 
