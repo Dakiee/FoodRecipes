@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -22,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Controller {
     @FXML
@@ -100,6 +102,8 @@ public class Controller {
 
         Scene scene = new Scene(parent, 800, 545);
         Stage stage = new Stage();
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("favicon.png")).openStream()));
+
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
@@ -197,6 +201,7 @@ public class Controller {
         Stage stage = new Stage();
         stage.setMinWidth(600);
         stage.setMinHeight(600);
+
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);

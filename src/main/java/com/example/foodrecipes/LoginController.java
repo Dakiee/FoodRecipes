@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ import javafx.stage.StageStyle;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class LoginController {
     @FXML
@@ -72,6 +74,8 @@ public class LoginController {
 
             Scene scene = new Scene(root, 800, 545);
             Stage newStage  = new Stage();
+            newStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("favicon.png")).openStream()));
+
 
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(scene);
