@@ -5,17 +5,22 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,15 +32,22 @@ public class Controller {
     @FXML
     private HBox ingredients;
     @FXML
+    private VBox hola;
+    @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private VBox recipeBox;
 
     @FXML
     private Button add;
+    @FXML
+    private ScrollPane sp2;
     @FXML
     private Button login_btn;
     @FXML
     private Button find_btn;
     private boolean spAdded = false;
+    ArrayList<Recipes> recipes = new ArrayList<>();
 
     @FXML
     void test(ActionEvent event) {
@@ -44,6 +56,7 @@ public class Controller {
     @FXML
     void onFindClicked(ActionEvent event) {
         if(!(selected == null || selected.isEmpty())) {
+            recipes.clear();
             DataBaseConnection connectNow = new DataBaseConnection();
             Connection connectDB = connectNow.getConnection();
             StringBuffer sb = new StringBuffer();
@@ -75,22 +88,92 @@ public class Controller {
             System.out.println(buf);
 
 
-            String food = "SELECT RecipeName FROM recipes WHERE " + buf;
+            String food = "SELECT * FROM recipes WHERE " + buf;
             System.out.println(food);
             try {
                 Statement statement = connectDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(food);
                 while (queryResult.next()) {
-                    System.out.println( (queryResult.getObject(1)));
+                    Recipes recipe = new Recipes();
+                    recipe.setRecipeId(queryResult.getObject(1).toString());
+                    recipe.setRecipeName(queryResult.getObject(2).toString());
+                    recipe.setCookTime(queryResult.getObject(3).toString());
+                    recipe.setIngIds(queryResult.getObject(4).toString());
+                    recipe.setDescription(queryResult.getObject(6).toString());
+
+                    System.out.println(recipe);
+                    recipes.add(recipe);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 e.getCause();
             }
             System.out.println(sb);
+            createRecipeBox();
         }
 
     }
+
+
+    private void createRecipeBox() {
+        double y = 0;
+        hola.getChildren().clear();
+//        recipeBox.getChildren().removeAll();
+        for (Recipes r: recipes) {
+            Image[] icons = getImage(r);
+            VBox vBox = new VBox();
+            vBox.setMinHeight(100);
+            HBox hBox = new HBox();
+            Label rName = new Label(r.getRecipeName());
+            rName.setFont(new Font(14));
+            rName.setStyle("-fx-font-weight: bold");
+            hBox.getChildren().add(rName);
+            ImageView[] imageView = new ImageView[3];
+            HBox imageHBox = new HBox();
+            for (int i = 0; i < 3; i++) {
+                imageView[i] =  new ImageView(icons[i]);
+                imageView[i].setFitWidth(38);
+                imageView[i].setFitHeight(38);
+                imageHBox.getChildren().add(imageView[i]);
+            }
+            hBox.getChildren().add(imageHBox);
+            Label rDescription = new Label(r.getDescription());
+            vBox.getChildren().add(hBox);
+            vBox.getChildren().add(rDescription);
+            vBox.setPadding(new Insets(10));
+            hola.getChildren().add(vBox);
+            y = y + vBox.getMinHeight();
+            hola.setMinHeight(y);
+        }
+        sp2.setContent(hola);
+        sp2.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+    }
+
+    private Image[] getImage(Recipes r) {
+        String[] imageNum = new String[3];
+        imageNum = r.getIngIds().split(" ");
+        Image[] images = new Image[3];
+
+        DataBaseConnection connectNow = new DataBaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        for (int i = 0; i < 3; i++) {
+            String verifyLogin = "SELECT name FROM ingredients WHERE ingredientsId =  '" + imageNum[i] + "'";
+            try {
+                Statement statement = connectDB.createStatement();
+                ResultSet queryResult = statement.executeQuery(verifyLogin);
+                while (queryResult.next()) {
+                    Image image = new Image(new FileInputStream("src/main/java/IngredientIcons/"+queryResult.getObject(1)+".png"));
+                    images[i] = image;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+            }
+        }
+
+        return images;
+    }
+
     ArrayList<Node> selected;
 
     @FXML
