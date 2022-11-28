@@ -27,6 +27,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Controller {
     @FXML
@@ -181,10 +182,10 @@ public class Controller {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent parent = fxmlLoader.load();
 
-        Scene scene = new Scene(parent, 800, 570);
+        Scene scene = new Scene(parent, 800, 545);
         Stage stage = new Stage();
-        stage.setMinWidth(600);
-        stage.setMinHeight(600);
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("favicon.png")).openStream()));
+
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
@@ -282,6 +283,7 @@ public class Controller {
         Stage stage = new Stage();
         stage.setMinWidth(600);
         stage.setMinHeight(600);
+
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);

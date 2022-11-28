@@ -1,11 +1,14 @@
 package com.example.foodrecipes;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -31,9 +34,14 @@ public class RegisterController{
 
     @FXML
     void signUpEvent(ActionEvent event) {
-        if(setPasswordField.getText().equals(confirmPasswordField.getText())){
+        if(tfUsername.getText().isEmpty() || setPasswordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()){
+            lblRegistrationMessage.setStyle("-fx-text-fill: red");
+            lblRegistrationMessage.setText("Please enter username and password");
+        }
+        else if(setPasswordField.getText().equals(confirmPasswordField.getText())){
             registerUser();
             lblIsValid.setText("");
+            closeStage(event);
         }
         else{
             lblIsValid.setText("Password does not match");
@@ -54,11 +62,16 @@ public class RegisterController{
         try{
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(insertToRegister);
-
             lblRegistrationMessage.setText("Success modofaka");
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
         }
+    }
+
+    private void closeStage(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 }
