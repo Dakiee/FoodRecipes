@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -17,20 +18,20 @@
          <children>
             <Label prefHeight="66.0" prefWidth="599.0" style="-fx-padding: 10px; -fx-font-size: 30px; -fx-background-color: E58412;" text="FoodRecipes" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="SansSerif Bold" size="12.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#test" prefHeight="32.0" prefWidth="79.0" style="-fx-background-color: E58412;" text="Favorites" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#test" prefHeight="32.0" prefWidth="89.0" style="-fx-background-color: E58412;" text="Favorites" textFill="WHITE">
                <HBox.margin>
                   <Insets right="20.0" top="18.0" />
                </HBox.margin>
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Button>
             <Button fx:id="login_btn" mnemonicParsing="false" onAction="#onOpenLogin" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #4DAFE7; -fx-border-width: 1px; -fx-border-color: #4DAFE7; -fx-border-radius: 10px;" text="Login" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="SansSerif Bold" size="14.0" />
                </font>
                <HBox.margin>
                   <Insets top="21.0" />
@@ -42,45 +43,17 @@
          </children>
       </HBox>
    </top>
-   <bottom>
-      <HBox prefHeight="386.0" prefWidth="779.0" style="-fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 10px;" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-         <children>
-            <VBox prefHeight="365.0" prefWidth="786.0">
-               <children>
-                  <ImageView fitHeight="353.0" fitWidth="497.0" pickOnBounds="true" preserveRatio="true" translateX="200.0" translateY="15.0">
-                     <image>
-                        <Image url="@image.png" />
-                     </image>
-                  </ImageView>
-                  <VBox prefHeight="200.0" prefWidth="100.0" />
-                  <Button fx:id="find_btn" mnemonicParsing="false" onAction="#onFindClicked" style="-fx-background-color: #3ACECE;" text="Find Recipes" textFill="WHITE" translateX="660.0" translateY="-20.0">
-                     <padding>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-            <HBox fx:id="ingredients" maxHeight="0.0" maxWidth="807.0" prefHeight="0.0" prefWidth="638.0" />
-         </children>
-      </HBox>
-   </bottom>
    <center>
-      <HBox prefHeight="87.0" prefWidth="747.0" style="-fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 10px;" BorderPane.alignment="CENTER">
+      <HBox maxHeight="82.0" minHeight="70.0" prefHeight="70.0" prefWidth="779.0" style="-fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 10px;" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fx:id="scrollPane" maxHeight="80.0" prefHeight="70.0" prefWidth="697.0" style="-fx-border-radius: 10px;">
+            <ScrollPane fx:id="scrollPane" maxHeight="82.0" minHeight="75.0" prefHeight="75.0" prefWidth="697.0" style="-fx-border-radius: 10px;">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </ScrollPane>
             <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#addIngredient" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: #3ACECE;" text="Add an ingredient" textFill="WHITE" translateX="-10.0" translateY="40.0" HBox.hgrow="NEVER">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="SansSerif Bold" size="12.0" />
                </font>
                <HBox.margin>
                   <Insets left="20.0" />
@@ -92,4 +65,34 @@
          </BorderPane.margin>
       </HBox>
    </center>
+   <bottom>
+      <StackPane maxHeight="392.0" maxWidth="800.0" minHeight="392.0" minWidth="800.0" prefHeight="392.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane fx:id="sp2" hbarPolicy="NEVER" maxHeight="700.0" maxWidth="780.0" minHeight="0.0" minWidth="780.0" prefHeight="55.0" prefWidth="780.0" style="-fx-border-radius: 10px; -fx-border-color: gray; -fx-border-width: 1px;" vbarPolicy="NEVER">
+               <StackPane.margin>
+                  <Insets bottom="10.0" />
+               </StackPane.margin>
+            </ScrollPane>
+            <VBox fx:id="hola" minHeight="366.0" minWidth="750.0" prefHeight="375.0" prefWidth="775.0">
+               <children>
+                  <VBox fx:id="recipeBox" prefHeight="4.0" prefWidth="775.0" />
+                  <HBox fx:id="ingredients" maxHeight="0.0" maxWidth="807.0" prefHeight="0.0" prefWidth="638.0" />
+                  <ImageView fitHeight="359.0" fitWidth="387.0" pickOnBounds="true" preserveRatio="true" translateX="200.0" translateY="5.0">
+                     <image>
+                        <Image url="@image.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <Button fx:id="find_btn" mnemonicParsing="false" onAction="#onFindClicked" style="-fx-background-color: #3ACECE;" text="Find Recipes" textFill="WHITE" translateX="330.0" translateY="160.0">
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font name="SansSerif Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </StackPane>
+   </bottom>
 </BorderPane>
