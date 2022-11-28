@@ -15,7 +15,7 @@ CREATE TABLE Recipes(
     PRIMARY KEY(RecipeId), 
     FOREIGN KEY (ingredientsId) 
     REFERENCES ingredients(ingredientsId), 
-    desription varchar(100) 
+    description varchar(10000)
 );
 
 CREATE TABLE favorites( 
@@ -94,3 +94,65 @@ INSERT INTO ingredients(name , type , origin) VALUES("tomato","","");
 INSERT INTO ingredients(name , type , origin) VALUES("tuna","","");
 INSERT INTO ingredients(name , type , origin) VALUES("yeast","","");
 INSERT INTO ingredients(name , type , origin) VALUES("yoghurt","","");
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Pulled BBQ Chicken Sandwiches','245 mins','1 15','1','We like any meat we cook to basically fall apart when we eat it. Of course, with chicken it is important to make sure it is cooked all the way through. No medium rare for chicken! If the chicken breasts are frozen, you need to cook it on high for 6 hours. If the chicken is thawed, 4-5 hours on low would cook it through. Of course, your crock pot may vary, so always make sure the chicken is cooked all the way through (the juice is clear) or use a meat thermometer. It should read 165* when put in the thickest part of the meat.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Grilled Potato and Bacon Skewers','50 mins','2 46','2','Rinse and scrub potatoes thoroughly. Cook potatoes in salted boiling water, about 15 minutes. Drain and let steam evaporate. Cut bacon into 1 cm thick (approximately 1/2 inch) slices. Thread potatoes and bacon alternately onto skewers. Heat grill. Grill skewers, turning occasionally, about 10 minutes. Season with salt and pepper.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Tomato Purée','180 mins','3 56','3','Place your pot over high heat and bring to a boil, stirring occasionally. Reduce the heat to medium-low and simmer for about 2 - 3 hours or until theres about 1/3 of the mixture left. Stir occasionally. Add the rest of the salt, stir to combine. Preheat the oven to 100°C / 210°F. Place your jars and lids in a roasting pan and place in the oven for 15 minutes. Pass tomatoes through a strainer over a large bowl and season to taste with the rest of the salt.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Garlic Canned Green Beans','180 mins','4 26','4','I love green beans and garlic, so I decided to add garlic cloves to my beans as I was canning them. This is much healthier for you than what you get in the grocery store and tastes better, too.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Onion Kebabs','55 mins','5 38','5','It is a dish of the famous Gaziantep cuisine. This is the most delicious form of onion. If you ever make an eggplant kebab, we recommend that you try a few skewers of onion kebab with it.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Pink Blueberry Lemonade','10 mins','6 31 54','6','In 1 quart glass measuring cup, combine sugar, 2 tablespoons of the blueberries and ½ cup water
+Microwave on high until hot, about 1 minute
+Stir until sugar dissolves
+Add lemon juice and enough water to make 1 quart
+Chill
+Fill tall glasses with ice cubes, add chilled blueberry mixture and remaining berries, dividing equally
+Garnish with lemon slices if desired');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Homemade Chicken Gravy','15 mins','7 25','7','In a saucepan, add 1½ cups of the chicken broth. Let it boil vigorously while stirring intermittently. In a small bowl, add the flour, salt, black pepper powder, and the remaining chicken broth. Whisk ingredients in the small well enough so that no lumps are present and a smooth mixture is formed. Slowly pour the flour mixture to the boiling chicken broth, while stirring it vigorously and no lumps are formed. Let the gravy cook until it is thick in consistency. Serve hot chicken gravy with mashed potatoes. Serve and enjoy!');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Buttered Brussels Sprouts','25 mins','8 10','7','Cook Brussels sprouts in a large pot of boiling salted water until just tender, 8 to 10 minutes. Drain in a colander and toss with butter and salt and pepper to taste.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Kasha','25 mins','9','9','In a medium sauce pan, combine buckwheat with 1 3/4 cups water, 1 Tbsp butter and 1/2 tsp salt. Bring to a simmer then cover with a tight fitting lid and simmer on low for 18-20 min. Just like with rice, you should hear hissing while cooking and it will get quiet when done.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Pickled carrots with sauerkraut','20 mins','11 13','11','Wash your fermentation equipment (jar, weight and lid)
+Wash your chopped carrots in cool water. (You can chop them, grate them, cut them to whatever consistency you’d like).
+Place your kitchen scale on the counter. Turn it on and set it to weigh in grams.
+Place a mixing bowl on your kitchen scale and tare/zero the scale.
+Add chopped carrots into the bowl on your scale until the scale reads 300 grams.
+Remove the bowl from your scale. Add two cups of boiling water to the carrots and blanch for 3 minutes. Immediately strain the carrots from the boiling water after three minutes, and put aside.
+Place your empty, clean mason jar on the scale, and tare/zero the scale. Make sure your scale is still set to grams and add 175 grams of Cultured Guru Sauerkraut Brine and 75 grams of apple cider vinegar to the jar.
+Add the 300 grams of carrots, into the mason jar.
+Place a small bowl on your scale and tare/zero the scale. weigh out 5 grams of salt. Then add the 5 grams of salt to the jar of carrots.
+Place your standard mason jar lid on the jar, and secure. shake the jar vigorously for 2 minutes.
+Remove the silver standard mason jar lid. Place your fermentation weight in the jar making sure to submerge the carrot pieces and weight fully in the liquid.
+Secure the standard mason jar lid to the mason jar.
+Ferment for 48 hours. Then remove the weight, secure a standard lid to the jar, and store in the fridge.');
+
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Parsley Infused Olive Oil','10 mins','37 39','37','Parsley is one of my favorite herbs to have on hand! It’s easy to grow. Keeps well in the fridge. And always adds nice flavor and color to recipes. To mix it up a little you can make it into a parsley infused olive oil, which is wonderful in soups, on bruschetta, or drizzled roasted or grilled foods! And it freezes well. Bonus! This parsley infused olive oil is a quick condiment which is wonderful drizzled over soups, bruschetta, grilled foods, and more! | justalittlebitofbacon.com Like my Paprika Infused Olive Oil, this parsley oil is fast to make while adding so much flavor to foods. In fact, this oil is even faster to make! All you need is oil and parsley (and a little salt if you want), a blender, and a container to keep it in. You’ll be done in the time it takes to press the button on your blender.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Syn Free Cheese Twists','35 mins','14 22 23','14','Next, take one strip and using kitchen scissors, cut it in 3 but not all the way to the end. You want it to still be attached at the end, so you can twist each piece like a braid. Add all the twisted bread pieces onto a baking tray lined with parchment paper. Then brush over the top with a beaten egg that is seasoned with salt.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Chocolate Yogurt','35 mins','17 18 59','17','How to make homemade chocolate yogurt? Scroll down to the recipe card for detailed instructions. Here`s an overview of the steps: First, you grab some creamy Greek yogurt. Whole milk is best. Now, add unsweetened cocoa powder and your favorite sweetener (I use stevia glycerite). Add just a bit of water, especially if your Greek yogurt is very thick. Then, with a spoon, slowly and patiently mix everything together. Once fully mixed, I like to let the mixture sit for about 30 minutes at room temperature. This allows the flavors to meld and it also dissolves any remaining stubborn cocoa powder. Then, I give the yogurt one more stir, and dig in! So since I make this recipe for my after-dinner dessert, I usually make it before we sit down to eat our dinner, then let it rest.');
+
+INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
+VALUES ('Skillet Ham & Rice','35 mins','29 48','29','In a large nonstick skillet, heat oil over medium-high heat; saute onion and mushrooms until tender. Stir in ham, pepper, broth and water; bring to a boil. Stir in rice. Reduce heat; simmer, covered, until rice is tender, about 5 minutes.
+Fluff with a fork. Top with green onions and cheese.');
