@@ -15,8 +15,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -123,7 +125,6 @@ public class Controller {
         for (Recipes r: recipes) {
             Image[] icons = getImage(r);
             VBox vBox = new VBox();
-            vBox.setMinHeight(100);
             HBox hBox = new HBox();
             Label rName = new Label(r.getRecipeName());
             rName.setFont(new Font(14));
@@ -131,33 +132,43 @@ public class Controller {
             hBox.getChildren().add(rName);
             ImageView[] imageView = new ImageView[3];
             HBox imageHBox = new HBox();
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 2; i++) {
                 imageView[i] =  new ImageView(icons[i]);
                 imageView[i].setFitWidth(38);
                 imageView[i].setFitHeight(38);
                 imageHBox.getChildren().add(imageView[i]);
             }
             hBox.getChildren().add(imageHBox);
-            Label rDescription = new Label(r.getDescription());
+
+            Text rDescription = new Text(r.getDescription());
+            HBox desc = new HBox(rDescription);
+            rDescription.setWrappingWidth(760);
+//            rDescription.setMaxWidth(720);
             vBox.getChildren().add(hBox);
-            vBox.getChildren().add(rDescription);
+            vBox.getChildren().add(desc);
+
+            double a = Region.USE_COMPUTED_SIZE;
+            System.out.println(a);
+            vBox.setMinHeight(Region.USE_PREF_SIZE);
             vBox.setPadding(new Insets(10));
+//            vBox.setStyle("-fx-margin:10;");
             hola.getChildren().add(vBox);
             y = y + vBox.getMinHeight();
-            hola.setMinHeight(y);
+            hola.setMinHeight(2000);
         }
         sp2.setContent(hola);
         sp2.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
+
     private Image[] getImage(Recipes r) {
-        String[] imageNum = new String[3];
+        String[] imageNum = new String[2];
         imageNum = r.getIngIds().split(" ");
-        Image[] images = new Image[3];
+        Image[] images = new Image[2];
 
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             String verifyLogin = "SELECT name FROM ingredients WHERE ingredientsId =  '" + imageNum[i] + "'";
             try {
                 Statement statement = connectDB.createStatement();
@@ -271,6 +282,7 @@ public class Controller {
     }
     @FXML
     private ArrayList<Node> onOpenDialog() throws IOException {
+        ingredients.getChildren().clear();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addIngredients.fxml"));
         Parent parent = fxmlLoader.load();
         SelectIngredients dialogController = fxmlLoader.getController();
