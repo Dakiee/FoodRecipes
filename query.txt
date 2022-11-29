@@ -111,13 +111,7 @@ INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
 VALUES ('Onion Kebabs','55 mins','5 38','5','It is a dish of the famous Gaziantep cuisine. This is the most delicious form of onion. If you ever make an eggplant kebab, we recommend that you try a few skewers of onion kebab with it.');
 
 INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
-VALUES ('Pink Blueberry Lemonade','10 mins','6 31 54','6','In 1 quart glass measuring cup, combine sugar, 2 tablespoons of the blueberries and ½ cup water
-Microwave on high until hot, about 1 minute
-Stir until sugar dissolves
-Add lemon juice and enough water to make 1 quart
-Chill
-Fill tall glasses with ice cubes, add chilled blueberry mixture and remaining berries, dividing equally
-Garnish with lemon slices if desired');
+VALUES ('Pink Blueberry Lemonade','10 mins','6 31 54','6','In 1 quart glass measuring cup, combine sugar, 2 tablespoons of the blueberries and ½ cup water. Microwave on high until hot, about 1 minute. Stir until sugar dissolves. Add lemon juice and enough water to make 1 quart. Chill ,Fill tall glasses with ice cubes, add chilled blueberry mixture and remaining berries, dividing equally. Garnish with lemon slices if desired');
 
 INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
 VALUES ('Homemade Chicken Gravy','15 mins','7 25','7','In a saucepan, add 1½ cups of the chicken broth. Let it boil vigorously while stirring intermittently. In a small bowl, add the flour, salt, black pepper powder, and the remaining chicken broth. Whisk ingredients in the small well enough so that no lumps are present and a smooth mixture is formed. Slowly pour the flour mixture to the boiling chicken broth, while stirring it vigorously and no lumps are formed. Let the gravy cook until it is thick in consistency. Serve hot chicken gravy with mashed potatoes. Serve and enjoy!');
@@ -129,19 +123,8 @@ INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
 VALUES ('Kasha','25 mins','9','9','In a medium sauce pan, combine buckwheat with 1 3/4 cups water, 1 Tbsp butter and 1/2 tsp salt. Bring to a simmer then cover with a tight fitting lid and simmer on low for 18-20 min. Just like with rice, you should hear hissing while cooking and it will get quiet when done.');
 
 INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
-VALUES ('Pickled carrots with sauerkraut','20 mins','11 13','11','Wash your fermentation equipment (jar, weight and lid)
-Wash your chopped carrots in cool water. (You can chop them, grate them, cut them to whatever consistency you’d like).
-Place your kitchen scale on the counter. Turn it on and set it to weigh in grams.
-Place a mixing bowl on your kitchen scale and tare/zero the scale.
-Add chopped carrots into the bowl on your scale until the scale reads 300 grams.
-Remove the bowl from your scale. Add two cups of boiling water to the carrots and blanch for 3 minutes. Immediately strain the carrots from the boiling water after three minutes, and put aside.
-Place your empty, clean mason jar on the scale, and tare/zero the scale. Make sure your scale is still set to grams and add 175 grams of Cultured Guru Sauerkraut Brine and 75 grams of apple cider vinegar to the jar.
-Add the 300 grams of carrots, into the mason jar.
-Place a small bowl on your scale and tare/zero the scale. weigh out 5 grams of salt. Then add the 5 grams of salt to the jar of carrots.
-Place your standard mason jar lid on the jar, and secure. shake the jar vigorously for 2 minutes.
-Remove the silver standard mason jar lid. Place your fermentation weight in the jar making sure to submerge the carrot pieces and weight fully in the liquid.
-Secure the standard mason jar lid to the mason jar.
-Ferment for 48 hours. Then remove the weight, secure a standard lid to the jar, and store in the fridge.');
+VALUES ('Pickled carrots with sauerkraut','20 mins','11 13','11','Wash your fermentation equipment (jar, weight and lid) Wash your chopped carrots in cool water. (You can chop them, grate them, cut them to whatever consistency you’d like). Place your kitchen scale on the counter. Turn it on and set it to weigh in grams. Place a mixing bowl on your kitchen scale and tare/zero the scale. Add chopped carrots into the bowl on your scale until the scale reads 300 grams. Remove the bowl from your scale. Add two cups of boiling water to the carrots and blanch for 3 minutes. Immediately strain the carrots from the boiling water after three minutes, and put aside.
+Place your empty, clean mason jar on the scale, and tare/zero the scale. Make sure your scale is still set to grams and add 175 grams of Cultured Guru Sauerkraut Brine and 75 grams of apple cider vinegar to the jar. Add the 300 grams of carrots, into the mason jar. Place a small bowl on your scale and tare/zero the scale. weigh out 5 grams of salt. Then add the 5 grams of salt to the jar of carrots. Place your standard mason jar lid on the jar, and secure. shake the jar vigorously for 2 minutes. Remove the silver standard mason jar lid. Place your fermentation weight in the jar making sure to submerge the carrot pieces and weight fully in the liquid. Secure the standard mason jar lid to the mason jar. Ferment for 48 hours. Then remove the weight, secure a standard lid to the jar, and store in the fridge.');
 
 
 INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
@@ -154,5 +137,4 @@ INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
 VALUES ('Chocolate Yogurt','35 mins','17 18 59','17','How to make homemade chocolate yogurt? Scroll down to the recipe card for detailed instructions. Here`s an overview of the steps: First, you grab some creamy Greek yogurt. Whole milk is best. Now, add unsweetened cocoa powder and your favorite sweetener (I use stevia glycerite). Add just a bit of water, especially if your Greek yogurt is very thick. Then, with a spoon, slowly and patiently mix everything together. Once fully mixed, I like to let the mixture sit for about 30 minutes at room temperature. This allows the flavors to meld and it also dissolves any remaining stubborn cocoa powder. Then, I give the yogurt one more stir, and dig in! So since I make this recipe for my after-dinner dessert, I usually make it before we sit down to eat our dinner, then let it rest.');
 
 INSERT INTO recipes(RecipeName, CookTime, ingIds, ingredientsId, description)
-VALUES ('Skillet Ham & Rice','35 mins','29 48','29','In a large nonstick skillet, heat oil over medium-high heat; saute onion and mushrooms until tender. Stir in ham, pepper, broth and water; bring to a boil. Stir in rice. Reduce heat; simmer, covered, until rice is tender, about 5 minutes.
-Fluff with a fork. Top with green onions and cheese.');
+VALUES ('Skillet Ham & Rice','35 mins','29 48','29','In a large nonstick skillet, heat oil over medium-high heat; saute onion and mushrooms until tender. Stir in ham, pepper, broth and water; bring to a boil. Stir in rice. Reduce heat; simmer, covered, until rice is tender, about 5 minutes. Fluff with a fork. Top with green onions and cheese.');

@@ -130,9 +130,9 @@ public class Controller {
             rName.setFont(new Font(14));
             rName.setStyle("-fx-font-weight: bold");
             hBox.getChildren().add(rName);
-            ImageView[] imageView = new ImageView[3];
+            ImageView[] imageView = new ImageView[icons.length];
             HBox imageHBox = new HBox();
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < icons.length; i++) {
                 imageView[i] =  new ImageView(icons[i]);
                 imageView[i].setFitWidth(38);
                 imageView[i].setFitHeight(38);
@@ -162,13 +162,13 @@ public class Controller {
 
 
     private Image[] getImage(Recipes r) {
-        String[] imageNum = new String[2];
+        String[] imageNum;
         imageNum = r.getIngIds().split(" ");
-        Image[] images = new Image[2];
+        Image[] images = new Image[imageNum.length];
 
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < imageNum.length; i++) {
             String verifyLogin = "SELECT name FROM ingredients WHERE ingredientsId =  '" + imageNum[i] + "'";
             try {
                 Statement statement = connectDB.createStatement();
