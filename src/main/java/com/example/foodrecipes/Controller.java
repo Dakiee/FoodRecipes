@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -138,7 +139,7 @@ public class Controller {
                 imageHBox.getChildren().add(imageView[i]);
             }
             hBox.getChildren().add(imageHBox);
-            Label rDescription = new Label(r.getDescription());
+            Text rDescription = new Text(r.getDescription());
             vBox.getChildren().add(hBox);
             vBox.getChildren().add(rDescription);
             vBox.setPadding(new Insets(10));
