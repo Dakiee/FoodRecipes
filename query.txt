@@ -20,10 +20,9 @@ CREATE TABLE Recipes(
 
 CREATE TABLE favorites( 
     favId int NOT NULL AUTO_INCREMENT, 
-    dates date, 
+    dates VARCHAR(100),
     recipeIds VARCHAR(100),
-    PRIMARY KEY(favId), 
-    FOREIGN KEY (recipeId) REFERENCES recipes(recipeId) 
+    PRIMARY KEY(favId)
 );
 
 CREATE TABLE users( 

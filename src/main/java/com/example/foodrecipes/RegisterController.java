@@ -7,10 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,12 +57,21 @@ public class RegisterController{
         String username = tfUsername.getText();
         String password = setPasswordField.getText();
 
-        if(isPasswordValid(password)){
-            String insertFields = "INSERT INTO users(username, PASSWORD) VALUES ('";
-            String insertValues = username + "','" + password + "')";
-            String insertToRegister = insertFields + insertValues;
+        if(!isPasswordValid(password)){
+            Date date = new Date();
+            String selectFavId = "SELECT favId FROM favorites WHERE dates = '" + date + "';";
+            String addFavorites = "INSERT INTO `favorites`( `dates`, `recipeIds`) VALUES ('"+ date +"',' ')";
+            int favId = -1;
             try{
                 Statement statement = connectDB.createStatement();
+                statement.executeUpdate(addFavorites);
+                ResultSet queryResult = statement.executeQuery(selectFavId);
+                while (queryResult.next()) {
+                    favId = queryResult.getInt(1);
+                }
+                String insertFields = "INSERT INTO users(username, PASSWORD,favId) VALUES ('";
+                String insertValues = username + "','" + password + "','" + favId +"');";
+                String insertToRegister = insertFields + insertValues;
                 statement.executeUpdate(insertToRegister);
                 lblRegistrationMessage.setText("Register Successful");
             }catch(Exception e){

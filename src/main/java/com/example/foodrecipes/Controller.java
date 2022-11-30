@@ -58,6 +58,8 @@ public class Controller {
     private boolean spAdded = false;
     ArrayList<Recipes> recipes = new ArrayList<>();
 
+    static int TOO = 0;
+
     /**
      * @param event
      */
@@ -190,23 +192,34 @@ public class Controller {
             vBox.getChildren().add(im);
             final boolean bool = false;
             vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                if(test) {
 //                ImageView imageView2 = (ImageView)e.getSource();
-                VBox box = (VBox)e.getSource();
-                HBox box2 = (HBox) box.getChildren().get(0);
-                Label label = (Label) box2.getChildren().get(0);
-                String foodName = box2.getChildren().get(0).toString();
-                int id = findId(foodName);
-                if(id == -1){
-                    System.err.println("Cannot found name");
-                }
-                else {
+                    VBox box = (VBox) e.getSource();
+                    HBox box2 = (HBox) box.getChildren().get(0);
+                    Label label = (Label) box2.getChildren().get(0);
+                    String foodName = label.getText();
+                    int id = findId(foodName);
+                    if (id == -1) {
+                        System.err.println("Cannot found name");
+                    } else {
+                        DataBaseConnection connectNow = new DataBaseConnection();
+                        Connection connectDB = connectNow.getConnection();
+                        try {
+                            Statement statement = connectDB.createStatement();
+                            String query = "UPDATE favorites SET recipeIds = CONCAT(recipeIds, '"+ id +" ') WHERE favId = 1;";
+                            statement.executeUpdate(query);
+                        } catch (Exception exp) {
+                            exp.printStackTrace();
+                            exp.getCause();
+                        }
 
+                    }
+                    String path = !bool ? "img/star-filled.png" : "img/star.png";
+                    Image image = new Image(getClass().getResourceAsStream(path));
+                    im.setImage(image);
+                    im.setFitWidth(20);
+                    im.setFitHeight(20);
                 }
-                String path = !bool?"img/star-filled.png":"img/star.png";
-                Image image = new Image(getClass().getResourceAsStream(path));
-                im.setImage(image);
-                im.setFitWidth(20);
-                im.setFitHeight(20);
             });
             VBox vb = new VBox();
             vb.setStyle("-fx-border-radius:10px;-fx-border-width:5px;-fx-border-color:#DAD9D9;");
@@ -229,6 +242,7 @@ public class Controller {
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
             String verifyLogin = "SELECT RecipeId FROM recipes WHERE RecipeName =  '" + foodName + "'";
+        System.out.println(verifyLogin);
             try {
                 Statement statement = connectDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(verifyLogin);
