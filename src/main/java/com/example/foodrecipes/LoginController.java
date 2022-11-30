@@ -68,13 +68,13 @@ public class LoginController {
 
     public void createAccountForm(MouseEvent mouseEvent) {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Register.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
             Parent root = fxmlLoader.load();
 //            primaryStage.close();
 
             Scene scene = new Scene(root, 800, 545);
             Stage newStage  = new Stage();
-            newStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("favicon.png")).openStream()));
+            newStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
 
 
             newStage.initModality(Modality.APPLICATION_MODAL);

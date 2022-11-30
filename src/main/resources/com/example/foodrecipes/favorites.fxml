@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: E58412;" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="66.0" prefWidth="390.0" text="Favorite Recipes" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="30.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="lblHome" alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="366.0" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #DAD9D9;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="505.0" prefWidth="741.0" style="-fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 20;">
+               <VBox.margin>
+                  <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+               </VBox.margin>
+               <children>
+                  <VBox fx:id="vbxContent" prefHeight="422.0" prefWidth="659.0" style="-fx-background-color: white;" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
