@@ -81,7 +81,7 @@
                <children>
                   <ScrollPane fx:id="sp2" hbarPolicy="NEVER" maxHeight="700.0" maxWidth="780.0" minHeight="0.0" minWidth="610.0" prefHeight="372.0" prefWidth="760.0" style="-fx-background: white; -fx-border-color: white;" vbarPolicy="NEVER">
                      <content>
-                        <VBox fx:id="hola" minHeight="350.0" minWidth="750.0" prefHeight="375.0" prefWidth="758.0" style="-fx-background-color: white;">
+                        <VBox fx:id="hola" minHeight="350.0" minWidth="734.0" prefHeight="375.0" prefWidth="734.0" style="-fx-background-color: white;">
                            <children>
                               <HBox fx:id="ingredients" maxHeight="0.0" maxWidth="807.0" prefHeight="0.0" prefWidth="638.0" />
                               <ImageView fitHeight="327.0" fitWidth="341.0" pickOnBounds="true" preserveRatio="true" translateX="200.0" translateY="5.0">

@@ -13,7 +13,7 @@ CREATE TABLE Recipes(
     ingIds varchar(100),
     ingredientsId int,
     PRIMARY KEY(RecipeId), 
-    FOREIGN KEY (ingredientsId) 
+    FOREIGN KEY (ingredientsId)
     REFERENCES ingredients(ingredientsId), 
     description varchar(10000)
 );
@@ -21,7 +21,7 @@ CREATE TABLE Recipes(
 CREATE TABLE favorites( 
     favId int NOT NULL AUTO_INCREMENT, 
     dates date, 
-    recipeId int, 
+    recipeIds VARCHAR(100),
     PRIMARY KEY(favId), 
     FOREIGN KEY (recipeId) REFERENCES recipes(recipeId) 
 );

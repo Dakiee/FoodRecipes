@@ -30,6 +30,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.jar.JarEntry;
 
 public class Controller {
     @FXML
@@ -144,7 +145,6 @@ public class Controller {
     private void createRecipeBox() {
         double y = 0;
         hola.getChildren().clear();
-//        recipeBox.getChildren().removeAll();
         for (Recipes r: recipes) {
             Image[] icons = getImage(r);
             VBox vBox = new VBox();
@@ -152,6 +152,7 @@ public class Controller {
             Label rName = new Label(r.getRecipeName());
             rName.setFont(new Font(14));
             rName.setStyle("-fx-font-weight: bold");
+            rName.setPrefWidth(500);
             hBox.getChildren().add(rName);
             ImageView[] imageView = new ImageView[icons.length];
             HBox imageHBox = new HBox();
@@ -165,29 +166,77 @@ public class Controller {
 
             Text rDescription = new Text(r.getDescription());
             HBox desc = new HBox(rDescription);
-            rDescription.setWrappingWidth(740);
+            rDescription.setWrappingWidth(685);
+
 //            rDescription.setMaxWidth(720);
             vBox.getChildren().add(hBox);
             vBox.getChildren().add(desc);
 
-            double a = Region.USE_COMPUTED_SIZE;
-            System.out.println(a);
             vBox.setMinHeight(Region.USE_PREF_SIZE);
-            vBox.setPadding(new Insets(10));
+            vBox.setPadding(new Insets(5,10,5,10));
             vBox.setStyle("-fx-background-color:#DAD9D9;");
-            vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                VBox vb = (VBox) mouseEvent.getSource();
-                vb.setStyle("-fx-background-color: red");
-            });
 
-//            vBox.setStyle("-fx-margin:10;");
-            hola.getChildren().add(vBox);
-            y = y + vBox.getMinHeight();
+            vBox.setPrefWidth(300);
+            vBox.setMaxWidth(300);
+            Image img = new Image(getClass().getResourceAsStream("img/star.png"));
+            ImageView im = new ImageView(img);
+            im.addEventFilter(MouseEvent.MOUSE_CLICKED, starClicked);
+            im.setFitHeight(20);
+            im.setFitWidth(20);
+            im.setTranslateX(670);
+            vBox.getChildren().add(im);
+            final boolean bool = false;
+            vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+//                ImageView imageView2 = (ImageView)e.getSource();
+                VBox box = (VBox)e.getSource();
+                HBox box2 = (HBox) box.getChildren().get(0);
+                Label label = (Label) box2.getChildren().get(0);
+                String foodName = box2.getChildren().get(0).toString();
+                int id = findId(foodName);
+                if(id == -1){
+                    System.err.println("Cannot found name");
+                }
+                else {
+
+                }
+                String path = !bool?"img/star-filled.png":"img/star.png";
+                Image image = new Image(getClass().getResourceAsStream(path));
+                im.setImage(image);
+                im.setFitWidth(20);
+                im.setFitHeight(20);
+            });
+            VBox vb = new VBox();
+            vb.setStyle("-fx-border-radius:10px;-fx-border-width:5px;-fx-border-color:#DAD9D9;");
+            vb.getChildren().add(vBox);
+//            vb.getChildren().add(im);
+            hola.getChildren().add(vb);
+            hola.setPadding(new Insets(10,10,0,10));
+            hola.setSpacing(10);
+
             hola.setMinHeight(2000);
-            hola.setPrefWidth(750);
+            hola.setPrefWidth(730);
+            hola.setMaxWidth(730);
         }
         sp2.setContent(hola);
         sp2.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    }
+
+    private int findId(String foodName) {
+        int id = -1;
+        DataBaseConnection connectNow = new DataBaseConnection();
+        Connection connectDB = connectNow.getConnection();
+            String verifyLogin = "SELECT RecipeId FROM recipes WHERE RecipeName =  '" + foodName + "'";
+            try {
+                Statement statement = connectDB.createStatement();
+                ResultSet queryResult = statement.executeQuery(verifyLogin);
+                while (queryResult.next()) {
+                    id = queryResult.getInt(1);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+            }
+        return id;
     }
 
 
@@ -270,6 +319,28 @@ public class Controller {
             // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
+
+    /**
+     *
+     */
+    public EventHandler<MouseEvent> starClicked = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent e) {
+
+            ImageView imageView = (ImageView)e.getSource();
+            Image image = new Image(getClass().getResourceAsStream("img/star-filled.png"));
+            imageView.setImage(image);
+            imageView.setFitWidth(20);
+            imageView.setFitHeight(20);
+
+//            hbox.setStyle("-fx-border:1px;-fx-border-color:rgb(255, 102, 102);-fx-border-radius:10px;" +
+//                    "-fx-background-color:rgb(255, 102, 102);");
+            // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
+        }
+    };
+
+
+
     /**
      *
      */
@@ -312,7 +383,7 @@ public class Controller {
         selected = onOpenDialog();
         System.out.println(selected);
         if(!spAdded) {
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
             spAdded=true;
         }
 
@@ -335,6 +406,8 @@ public class Controller {
                 test.addEventFilter(MouseEvent.MOUSE_CLICKED,mouseClick);
 
                 ingredients.getChildren().add(test);
+                ingredients.setSpacing(1);
+                ingredients.setPadding(new Insets(3,0,0,3));
 
             } else System.out.println("Item is in list");
 
