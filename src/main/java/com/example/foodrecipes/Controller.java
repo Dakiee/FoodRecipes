@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.jar.JarEntry;
 
+import static com.example.foodrecipes.LoginController.test;
+
 public class Controller {
     @FXML
     private HBox ingredients;
@@ -61,6 +63,7 @@ public class Controller {
      */
     @FXML
     void onOpenFavorites(ActionEvent event) throws IOException{
+        System.out.println(test);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favorites.fxml"));
         Parent parent = fxmlLoader.load();
 
