@@ -52,10 +52,17 @@ public class Controller {
     private boolean spAdded = false;
     ArrayList<Recipes> recipes = new ArrayList<>();
 
+    /**
+     * @param event
+     */
     @FXML
     void test(ActionEvent event) {
         System.out.println(selected);
     }
+
+    /**
+     * @param event
+     */
     @FXML
     void onFindClicked(ActionEvent event) {
         if(!(selected == null || selected.isEmpty())) {
@@ -117,7 +124,9 @@ public class Controller {
 
     }
 
-
+    /**
+     *
+     */
     private void createRecipeBox() {
         double y = 0;
         hola.getChildren().clear();
@@ -151,6 +160,12 @@ public class Controller {
             System.out.println(a);
             vBox.setMinHeight(Region.USE_PREF_SIZE);
             vBox.setPadding(new Insets(10));
+            vBox.setStyle("-fx-background-color:#DAD9D9;");
+            vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+                VBox vb = (VBox) mouseEvent.getSource();
+                vb.setStyle("-fx-background-color: red");
+            });
+
 //            vBox.setStyle("-fx-margin:10;");
             hola.getChildren().add(vBox);
             y = y + vBox.getMinHeight();
@@ -162,6 +177,11 @@ public class Controller {
     }
 
 
+    /**
+     *
+     * @param r
+     * @return
+     */
     private Image[] getImage(Recipes r) {
         String[] imageNum;
         imageNum = r.getIngIds().split(" ");
@@ -189,6 +209,11 @@ public class Controller {
 
     ArrayList<Node> selected;
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onOpenLogin(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
@@ -203,6 +228,12 @@ public class Controller {
         stage.setScene(scene);
         stage.showAndWait();
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     private boolean isInList(String id) {
 
         for (int i = 0; i < ingredients.getChildren().size(); i++) {
@@ -210,6 +241,10 @@ public class Controller {
         }
         return false;
     }
+
+    /**
+     *
+     */
     public EventHandler<MouseEvent> mouseEnter = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
@@ -221,6 +256,9 @@ public class Controller {
             // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
+    /**
+     *
+     */
     public EventHandler<MouseEvent> mouseExit = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
@@ -233,6 +271,9 @@ public class Controller {
             // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
+    /**
+     *
+     */
     public EventHandler<MouseEvent> mouseClick = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
@@ -246,6 +287,12 @@ public class Controller {
             // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
+
+    /**
+     * author: Dalai
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void addIngredient(ActionEvent event) throws IOException {
         selected = onOpenDialog();
