@@ -19,7 +19,7 @@
    <children>
       <ImageView fitHeight="110.0" fitWidth="200.0" scaleX="4.0" scaleY="5.0">
          <image>
-            <Image url="@bg.jpg" />
+            <Image url="@img/bg.jpg" />
          </image>
       </ImageView>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;">
@@ -90,17 +90,17 @@
       </VBox>
       <ImageView fitHeight="200.0" fitWidth="200.0" scaleX="0.15" scaleY="0.15" translateX="-150.0" translateY="40.0">
          <image>
-            <Image url="@password.png" />
+            <Image url="@img/password.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="200.0" fitWidth="200.0" scaleX="0.15" scaleY="0.15" translateX="-150.0" translateY="-16.0">
          <image>
-            <Image url="@user.png" />
+            <Image url="@img/user.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="200.0" fitWidth="200.0" scaleX="0.3" scaleY="0.3" translateX="50.0" translateY="-115.0">
          <image>
-            <Image url="@food.png" />
+            <Image url="@img/food.png" />
          </image>
       </ImageView>
    </children>

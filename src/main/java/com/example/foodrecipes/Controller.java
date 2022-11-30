@@ -42,6 +42,9 @@ public class Controller {
     private VBox recipeBox;
 
     @FXML
+    private Button btnFavorites;
+
+    @FXML
     private Button add;
     @FXML
     private ScrollPane sp2;
@@ -56,7 +59,18 @@ public class Controller {
      * @param event
      */
     @FXML
-    void test(ActionEvent event) {
+    void onOpenFavorites(ActionEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favorites.fxml"));
+        Parent parent = fxmlLoader.load();
+
+        Scene scene = new Scene(parent, 800, 570);
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
+
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
         System.out.println(selected);
     }
 
@@ -216,12 +230,12 @@ public class Controller {
      */
     @FXML
     void onOpenLogin(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent parent = fxmlLoader.load();
 
         Scene scene = new Scene(parent, 800, 545);
         Stage stage = new Stage();
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("favicon.png")).openStream()));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
 
 
         stage.initModality(Modality.APPLICATION_MODAL);
