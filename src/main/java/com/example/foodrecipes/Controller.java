@@ -84,9 +84,9 @@ public class Controller {
 
             for (int i = 0; i < cond.size(); i++) {
                 if(i == cond.size()-1)
-                    buf.append("ingIds LIKE '%" + cond.get(i) + "%'");
+                    buf.append("ingIds LIKE '% " + cond.get(i) + " %'");
                 else
-                    buf.append("ingIds LIKE '%" + cond.get(i) + "%' OR ");
+                    buf.append("ingIds LIKE '% " + cond.get(i) + " %' OR ");
             }
             System.out.println(buf);
 
@@ -134,15 +134,15 @@ public class Controller {
             HBox imageHBox = new HBox();
             for (int i = 0; i < icons.length; i++) {
                 imageView[i] =  new ImageView(icons[i]);
-                imageView[i].setFitWidth(38);
-                imageView[i].setFitHeight(38);
+                imageView[i].setFitWidth(25);
+                imageView[i].setFitHeight(25);
                 imageHBox.getChildren().add(imageView[i]);
             }
             hBox.getChildren().add(imageHBox);
 
             Text rDescription = new Text(r.getDescription());
             HBox desc = new HBox(rDescription);
-            rDescription.setWrappingWidth(760);
+            rDescription.setWrappingWidth(740);
 //            rDescription.setMaxWidth(720);
             vBox.getChildren().add(hBox);
             vBox.getChildren().add(desc);
@@ -155,9 +155,10 @@ public class Controller {
             hola.getChildren().add(vBox);
             y = y + vBox.getMinHeight();
             hola.setMinHeight(2000);
+            hola.setPrefWidth(750);
         }
         sp2.setContent(hola);
-        sp2.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        sp2.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
 
@@ -250,7 +251,7 @@ public class Controller {
         selected = onOpenDialog();
         System.out.println(selected);
         if(!spAdded) {
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
             spAdded=true;
         }
 
@@ -258,7 +259,8 @@ public class Controller {
 
             String id = ing.getId();
             HBox test = (HBox) ing;
-            test.setMinWidth(100);
+            test.setMinWidth(Region.USE_PREF_SIZE);
+            test.setPadding(new Insets(0,2,0,2));
             if (!isInList(id)) {
 //                ing.minWidth(300);
 //                ing.prefWidth(300);
