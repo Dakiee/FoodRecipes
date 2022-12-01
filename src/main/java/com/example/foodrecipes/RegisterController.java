@@ -66,6 +66,7 @@ public class RegisterController {
                 String insertValues = username + "','" + password + "','" + favId + "');";
                 String insertToRegister = insertFields + insertValues;
                 statement.executeUpdate(insertToRegister);
+                System.out.println(username + " successfully registered");
                 lblRegistrationMessage.setText("Register Successful");
             } catch (Exception e) {
                 e.printStackTrace();

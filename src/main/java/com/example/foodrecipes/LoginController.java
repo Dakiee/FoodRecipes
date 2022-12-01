@@ -67,6 +67,7 @@ public class LoginController {
                 if (temp.getUserName().matches(username)) {
                     wrongLogin.setText("Sign in Successful");
                     wrongLogin.setStyle("-fx-text-fill: green");
+                    System.out.println(username + " successfully logged in");
                     user = temp;
 
                     changeLoginButton();
