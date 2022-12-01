@@ -18,7 +18,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Objects;
-
+/**
+ * @author : Dakie
+ * @version : 1.0.0
+ * @date : 2022:11:20
+ * @improvement : Login and register
+ *
+ * @version 1.0.1
+ * @date : 2022:11:24
+ * @improvement : Login Field fixed
+ */
 public class LoginController {
 
     static Users user;
@@ -40,7 +49,7 @@ public class LoginController {
             wrongLogin.setText("Please enter username and password");
         }
     }
-
+//    Enehuu method ni garaas orj irj bui username bolon password iig database dotroos shalgan garj ireh utguudad tohiroh uildluudiig hiine
     void validateLogin(String username, String password) {
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
@@ -104,7 +113,10 @@ public class LoginController {
         }
 
     }
-
+    /*
+    *
+    * Hervee hereglegch burtgelgui bol signup dovchiig darsanaar enehuu method deer irj register stage iig duudah bolno
+     */
     public void createAccountForm(MouseEvent mouseEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));

@@ -2,7 +2,6 @@ package com.example.foodrecipes;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -77,7 +76,10 @@ public class RegisterController {
             lblRegistrationMessage.setText("Password Not Valid");
         }
     }
-
+    /*
+    *
+    Garaas ugsun password valid esehiig regex ashiglan valid baina uu esehiig shalgana
+   */
     boolean isPasswordValid(String password) {
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
         Pattern pattern = Pattern.compile(regex);
