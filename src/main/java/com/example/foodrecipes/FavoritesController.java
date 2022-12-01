@@ -49,7 +49,7 @@ public class FavoritesController {
                 ResultSet queryResult = statement.executeQuery(getRecipes);
                 while (queryResult.next()) {
                     Recipes recipe = new Recipes();
-                    recipe.setRecipeId(queryResult.getObject(1).toString());
+                    recipe.setRecipeId(Integer.parseInt(queryResult.getObject(1).toString()));
                     recipe.setRecipeName(queryResult.getObject(2).toString());
                     recipe.setCookTime(queryResult.getObject(3).toString());
                     recipe.setIngIds(queryResult.getObject(4).toString());

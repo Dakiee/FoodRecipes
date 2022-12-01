@@ -1,17 +1,17 @@
 package com.example.foodrecipes;
 
 public class Recipes {
-    private String recipeId;
+    private int recipeId;
     private String recipeName;
     private String cookTime;
     private String ingIds;
     private String description;
 
-    public String getRecipeId() {
+    public int getRecipeId() {
         return recipeId;
     }
 
-    public void setRecipeId(String recipeId) {
+    public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
     }
 

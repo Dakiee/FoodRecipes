@@ -167,7 +167,7 @@ public class RecipeController {
                 ResultSet queryResult = statement.executeQuery(food);
                 while (queryResult.next()) {
                     Recipes recipe = new Recipes();
-                    recipe.setRecipeId(queryResult.getObject(1).toString());
+                    recipe.setRecipeId((Integer) queryResult.getObject(1));
                     recipe.setRecipeName(queryResult.getObject(2).toString());
                     recipe.setCookTime(queryResult.getObject(3).toString());
                     recipe.setIngIds(queryResult.getObject(4).toString());
@@ -371,7 +371,6 @@ public class RecipeController {
      * @return
      */
     private boolean isInList(String id) {
-
         for (int i = 0; i < ingredients.getChildren().size(); i++) {
             if (ingredients.getChildren().get(i).getId().equals(id))
                 return true;
