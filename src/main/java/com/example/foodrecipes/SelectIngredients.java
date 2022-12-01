@@ -59,7 +59,6 @@ public class SelectIngredients {
     public EventHandler<MouseEvent> eventHandler = e -> {
         Node hbox = (Node)e.getSource();
         if (selected.contains(hbox)) {
-            //System.out.println(e.getSource());
             hbox.setStyle("-fx-border:1px;-fx-border-color:lightgray;-fx-border-radius:10px;" +
                     "-fx-background-color:white;");
             selected.remove(hbox);
@@ -69,8 +68,6 @@ public class SelectIngredients {
             selected.add(hbox);
         }
 
-
-        // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
     };
     public EventHandler getEventHandler(){
         return eventHandler;
@@ -78,13 +75,10 @@ public class SelectIngredients {
     @FXML
     public void FillIngredients() throws FileNotFoundException {
         ArrayList<String> ingredients;
-        //        ingredients.add("BBQ sause, bacon, basil, beans, beef, berry, broth, brussels sprouts, buckwheat, butter, cabbage, capers, carrot, cheese, chicken, chickpeas, chocolate, cocoa, couscous, cucumber, dill, dough, eggs, fish, flour, garlic, ginger, gnocchi, ham, kale, lemon, lentils, milk, mustard, noodles, nuts, olives, onion, parsley, parsnips, pasta, pastry, peanut, peas, pepper, potatoes, quinoa, rice, salmon, sardine, sausage, soy sauce, starch, sugar, toast, tomato, tuna, yeast, yoghurt");
         String str ="BBQ sause, bacon, basil, beans, beef, berry, broth, brussels sprouts, buckwheat, butter, cabbage, capers, carrot, cheese, chicken, chickpeas, chocolate, cocoa, couscous, cucumber, dill, dough, eggs, fish, flour, garlic, ginger, gnocchi, ham, kale, lemon, lentils, milk, mustard, noodles, nuts, olives, onion, parsley, parsnips, pasta, pastry, peanut, peas, pepper, potatoes, quinoa, rice, salmon, sardine, sausage, soy sauce, starch, sugar, toast, tomato, tuna, yeast, yoghurt";
         ingredients = new ArrayList<>(List.of(str.split(", ")));
 
         Collections.sort(ingredients);
-//        System.out.println(ingredients);
-
 
         for (String ing : ingredients) {
             HBox hbox = new HBox();
@@ -105,8 +99,6 @@ public class SelectIngredients {
 
 
             hbox.setAlignment(Pos.CENTER);
-
-
 
             //Registering the event filter
             hbox.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);

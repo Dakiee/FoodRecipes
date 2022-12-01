@@ -3,10 +3,8 @@ package com.example.foodrecipes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -35,30 +33,27 @@ public class LoginController {
     @FXML
     void btnSign(ActionEvent event) throws InterruptedException {
         if(!tfUsername.getText().isBlank() && !tfPassword.getText().isBlank()) {
-            validateLogin();
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
+            validateLogin(tfUsername.getText(), tfPassword.getText());
         } else {
             wrongLogin.setText("Please enter username and password");
         }
     }
-    void validateLogin(){
+    void validateLogin(String username, String password){
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "SELECT count(1) FROM users WHERE username =  '" + tfUsername.getText() + "' AND password = '" + tfPassword.getText() + "'";
+        String verifyLogin = "SELECT count(1) FROM users WHERE username =  '" + username + "' AND password = '" + password + "'";
         try{
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if(queryResult.getInt(1) == 1){
-                    wrongLogin.setStyle("-fx-text-fill: green");
                     wrongLogin.setText("Sign in Successful");
+                    wrongLogin.setStyle("-fx-text-fill: green");
                     test = true;
                 } else{
-                    wrongLogin.setStyle("-fx-text-fill: red");
                     wrongLogin.setText("Wrong Name or Password!!");
+                    wrongLogin.setStyle("-fx-text-fill: red");
                     test = false;
                 }
             }

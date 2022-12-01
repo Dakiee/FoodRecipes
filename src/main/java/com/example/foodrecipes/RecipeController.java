@@ -30,11 +30,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.jar.JarEntry;
 
 import static com.example.foodrecipes.LoginController.test;
 
-public class Controller {
+public class RecipeController {
     @FXML
     private HBox ingredients;
     @FXML
@@ -89,8 +88,6 @@ public class Controller {
             Connection connectDB = connectNow.getConnection();
             StringBuffer sb = new StringBuffer();
             for (Node obj : selected) {
-//            sb.append(obj.getId() + " ");
-
                 String verifyLogin = "SELECT ingredientsId FROM ingredients WHERE name =  '" + obj.getId() + "'";
                 try {
                     Statement statement = connectDB.createStatement();
@@ -171,7 +168,6 @@ public class Controller {
             HBox desc = new HBox(rDescription);
             rDescription.setWrappingWidth(685);
 
-//            rDescription.setMaxWidth(720);
             vBox.getChildren().add(hBox);
             vBox.getChildren().add(desc);
 
@@ -190,7 +186,6 @@ public class Controller {
             vBox.getChildren().add(im);
             final boolean bool = false;
             vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-//                ImageView imageView2 = (ImageView)e.getSource();
                 VBox box = (VBox)e.getSource();
                 HBox box2 = (HBox) box.getChildren().get(0);
                 Label label = (Label) box2.getChildren().get(0);
@@ -198,9 +193,6 @@ public class Controller {
                 int id = findId(foodName);
                 if(id == -1){
                     System.err.println("Cannot found name");
-                }
-                else {
-
                 }
                 String path = !bool?"img/star-filled.png":"img/star.png";
                 Image image = new Image(getClass().getResourceAsStream(path));

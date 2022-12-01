@@ -39,7 +39,6 @@ public class RegisterController{
         else if(setPasswordField.getText().equals(confirmPasswordField.getText())){
             registerUser();
             lblIsValid.setText("");
-//            closeStage(event);
         }
         else{
             lblIsValid.setText("Password does not match");
@@ -78,10 +77,5 @@ public class RegisterController{
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-    }
-    private void closeStage(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
     }
 }
