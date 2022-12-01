@@ -7,6 +7,8 @@ public class Users {
         this.password = password;
         this.favId = favId;
     }
+    public Users(){
+    }
 
     private int userId;
     private String userName;

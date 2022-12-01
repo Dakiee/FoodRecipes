@@ -57,25 +57,28 @@ public class LoginController {
         String verifyLogin = "SELECT * FROM users WHERE username =  '" + username + "' AND PASSWORD = '"
                 + password + "'";
         try {
+            Users temp = new Users();
+            temp.setUserName("");
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while (queryResult.next()) {
-                Users temp = new Users((Integer) queryResult.getObject(1),
+                temp = new Users((Integer) queryResult.getObject(1),
                                 (String) queryResult.getObject(2),
                                 (String) queryResult.getObject(3),
                                 (Integer) queryResult.getObject(4));
-                if (temp.getUserName().matches(username)) {
-                    wrongLogin.setText("Sign in Successful");
-                    wrongLogin.setStyle("-fx-text-fill: green");
-                    System.out.println(username + " successfully logged in");
-                    user = temp;
 
-                    changeLoginButton();
-                    getFavObject();
-                } else {
-                    wrongLogin.setText("Wrong Name or Password!!");
-                    wrongLogin.setStyle("-fx-text-fill: red");
-                }
+            }
+            if (temp.getUserName().matches(username)) {
+                wrongLogin.setText("Sign in Successful");
+                wrongLogin.setStyle("-fx-text-fill: green");
+                System.out.println(username + " successfully logged in");
+                user = temp;
+
+                changeLoginButton();
+                getFavObject();
+            } else {
+                wrongLogin.setText("Wrong Name or Password!!");
+                wrongLogin.setStyle("-fx-text-fill: red");
             }
 
         } catch (Exception e) {
