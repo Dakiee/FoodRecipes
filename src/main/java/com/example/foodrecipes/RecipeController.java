@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.example.foodrecipes.LoginController.test;
+import static com.example.foodrecipes.LoginController.user;
 
 public class RecipeController {
     @FXML
@@ -64,18 +64,19 @@ public class RecipeController {
      */
     @FXML
     void onOpenFavorites(ActionEvent event) throws IOException {
-        System.out.println(test);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favorites.fxml"));
-        Parent parent = fxmlLoader.load();
+        if(user != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favorites.fxml"));
+            Parent parent = fxmlLoader.load();
 
-        Scene scene = new Scene(parent, 800, 570);
-        Stage stage = new Stage();
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
+            Scene scene = new Scene(parent, 800, 570);
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
 
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.showAndWait();
-        System.out.println(selected);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+            System.out.println(selected);
+        }
     }
 
     /**
@@ -185,7 +186,7 @@ public class RecipeController {
             vBox.getChildren().add(im);
             final boolean bool = false;
             vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-                if (test) {
+                if (LoginController.user != null) {
                     // ImageView imageView2 = (ImageView)e.getSource();
                     VBox box = (VBox) e.getSource();
                     HBox box2 = (HBox) box.getChildren().get(0);
