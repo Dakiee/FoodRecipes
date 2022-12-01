@@ -47,7 +47,6 @@ public class Recipes {
         this.description = description;
     }
 
-
     @Override
     public String toString() {
         return "Recipes{" +

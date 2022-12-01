@@ -56,8 +56,9 @@ public class SelectIngredients {
         }
 
     }
+
     public EventHandler<MouseEvent> eventHandler = e -> {
-        Node hbox = (Node)e.getSource();
+        Node hbox = (Node) e.getSource();
         if (selected.contains(hbox)) {
             hbox.setStyle("-fx-border:1px;-fx-border-color:lightgray;-fx-border-radius:10px;" +
                     "-fx-background-color:white;");
@@ -69,13 +70,15 @@ public class SelectIngredients {
         }
 
     };
-    public EventHandler getEventHandler(){
+
+    public EventHandler getEventHandler() {
         return eventHandler;
     }
+
     @FXML
     public void FillIngredients() throws FileNotFoundException {
         ArrayList<String> ingredients;
-        String str ="BBQ sause, bacon, basil, beans, beef, berry, broth, brussels sprouts, buckwheat, butter, cabbage, capers, carrot, cheese, chicken, chickpeas, chocolate, cocoa, couscous, cucumber, dill, dough, eggs, fish, flour, garlic, ginger, gnocchi, ham, kale, lemon, lentils, milk, mustard, noodles, nuts, olives, onion, parsley, parsnips, pasta, pastry, peanut, peas, pepper, potatoes, quinoa, rice, salmon, sardine, sausage, soy sauce, starch, sugar, toast, tomato, tuna, yeast, yoghurt";
+        String str = "BBQ sause, bacon, basil, beans, beef, berry, broth, brussels sprouts, buckwheat, butter, cabbage, capers, carrot, cheese, chicken, chickpeas, chocolate, cocoa, couscous, cucumber, dill, dough, eggs, fish, flour, garlic, ginger, gnocchi, ham, kale, lemon, lentils, milk, mustard, noodles, nuts, olives, onion, parsley, parsnips, pasta, pastry, peanut, peas, pepper, potatoes, quinoa, rice, salmon, sardine, sausage, soy sauce, starch, sugar, toast, tomato, tuna, yeast, yoghurt";
         ingredients = new ArrayList<>(List.of(str.split(", ")));
 
         Collections.sort(ingredients);
@@ -89,20 +92,16 @@ public class SelectIngredients {
             Label label = new Label(ing);
             label.setStyle("-fx-padding: 5px;-fx-font-size: 16px;");
 
-
-
-            Image image = new Image(new FileInputStream("src/main/java/IngredientIcons/"+ing+".png"));
+            Image image = new Image(new FileInputStream("src/main/java/IngredientIcons/" + ing + ".png"));
             ImageView imageView = new ImageView(image);
 
             imageView.setFitHeight(20);
             imageView.setFitWidth(20);
 
-
             hbox.setAlignment(Pos.CENTER);
 
-            //Registering the event filter
+            // Registering the event filter
             hbox.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-
 
             hbox.getChildren().addAll(imageView, label);
 
