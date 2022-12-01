@@ -1,5 +1,6 @@
 package com.example.foodrecipes;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,6 +29,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +45,8 @@ public class RecipeController {
     private ScrollPane scrollPane;
     @FXML
     private VBox recipeBox;
-
+    @FXML
+    private HBox upBox;
     @FXML
     private Button btnFavorites;
 
@@ -58,7 +61,11 @@ public class RecipeController {
     private boolean spAdded = false;
     ArrayList<Recipes> recipes = new ArrayList<>();
 
-    static int TOO = 0;
+    @FXML
+    void initialize(){
+        changeLoginBtn(user == null);
+        System.out.println("bandi");
+    }
 
     /**
      * @param event
@@ -66,11 +73,25 @@ public class RecipeController {
     @FXML
     void onOpenFavorites(ActionEvent event) throws IOException {
         if(user != null) {
+            DataBaseConnection connectNow = new DataBaseConnection();
+            Connection connectDB = connectNow.getConnection();
+            try {
+                Statement statement = connectDB.createStatement();
+                String getRecipeIds = "SELECT recipe_ids FROM favorites WHERE fav_id = " + user.getFavId()  + ";";
+                ResultSet queryResult = statement.executeQuery(getRecipeIds);
+                while (queryResult.next()) {
+                    favorites.setRecipe((String) queryResult.getObject(1));
+                }
+            } catch (Exception exp) {
+                exp.printStackTrace();
+                exp.getCause();
+            }
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favorites.fxml"));
             Parent parent = fxmlLoader.load();
-
             FavoritesController favoritesController = fxmlLoader.getController();
             favoritesController.addContent();
+
             Scene scene = new Scene(parent, 800, 570);
             Stage stage = new Stage();
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
@@ -82,18 +103,27 @@ public class RecipeController {
         }
     }
 
+    double sceneWidth;
+    double sceneHeight;
+
     /**
      * @param event
      */
     @FXML
     void onFindClicked(ActionEvent event) {
+
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        sceneWidth = stage.getWidth();
+        sceneHeight = stage.getHeight();
+
         if (!(selected == null || selected.isEmpty())) {
             recipes.clear();
             DataBaseConnection connectNow = new DataBaseConnection();
             Connection connectDB = connectNow.getConnection();
             StringBuffer sb = new StringBuffer();
             for (Node obj : selected) {
-                String verifyLogin = "SELECT ingredientsId FROM ingredients WHERE name =  '" + obj.getId() + "'";
+                String verifyLogin = "SELECT ingredients_id FROM ingredients WHERE name =  '" + obj.getId() + "'";
                 try {
                     Statement statement = connectDB.createStatement();
                     ResultSet queryResult = statement.executeQuery(verifyLogin);
@@ -110,9 +140,9 @@ public class RecipeController {
 
             for (int i = 0; i < cond.size(); i++) {
                 if (i == cond.size() - 1)
-                    buf.append("ingIds LIKE '% " + cond.get(i) + " %'");
+                    buf.append("ing_ids LIKE '% " + cond.get(i) + " %'");
                 else
-                    buf.append("ingIds LIKE '% " + cond.get(i) + " %' OR ");
+                    buf.append("ing_ids LIKE '% " + cond.get(i) + " %' OR ");
             }
             System.out.println(buf);
 
@@ -141,7 +171,6 @@ public class RecipeController {
         }
 
     }
-
     /**
      *
      */
@@ -204,7 +233,7 @@ public class RecipeController {
                         try {
                             String recipeIds = "";
                             Statement statement = connectDB.createStatement();
-                            String qry = "SELECT recipeIds FROM favorites WHERE favId = "+ user.getFavId() +";";
+                            String qry = "SELECT recipe_ids FROM favorites WHERE fav_id = "+ user.getFavId() +";";
                             ResultSet queryResult = statement.executeQuery(qry);
                             while (queryResult.next()){
                                 recipeIds += queryResult.getObject(1).toString();
@@ -212,7 +241,7 @@ public class RecipeController {
                             if(recipeIds.contains(String.valueOf(id))){
                                 System.out.println("is already fav");
                             } else {
-                                String query = "UPDATE favorites SET recipeIds = CONCAT(recipeIds, '"+ id +" ') WHERE favId = "+ user.getFavId() +";";
+                                String query = "UPDATE favorites SET recipe_ids = CONCAT(recipe_ids, '"+ id +" ') WHERE fav_id = "+ user.getFavId() +";";
                                 statement.executeUpdate(query);
                             }
                         } catch (Exception exp) {
@@ -243,11 +272,11 @@ public class RecipeController {
         sp2.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
-    private int findId(String foodName) {
+    public int findId(String foodName) {
         int id = -1;
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
-        String verifyLogin = "SELECT RecipeId FROM recipes WHERE RecipeName =  '" + foodName + "'";
+        String verifyLogin = "SELECT recipe_id FROM recipes WHERE recipe_name =  '" + foodName + "'";
         System.out.println(verifyLogin);
         try {
             Statement statement = connectDB.createStatement();
@@ -275,7 +304,7 @@ public class RecipeController {
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
         for (int i = 0; i < imageNum.length; i++) {
-            String verifyLogin = "SELECT name FROM ingredients WHERE ingredientsId =  '" + imageNum[i] + "'";
+            String verifyLogin = "SELECT name FROM ingredients WHERE ingredients_id =  '" + imageNum[i] + "'";
             try {
                 Statement statement = connectDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(verifyLogin);
@@ -467,5 +496,14 @@ public class RecipeController {
             ing.removeEventFilter(MouseEvent.MOUSE_CLICKED, handler);
         }
         return temporary;
+    }
+    void changeLoginBtn(boolean b){
+            Button button = (Button) upBox.getChildren().get(2);
+        if(b){
+            button.setText("Login");
+        } else {
+            button.setText("Log out");
+        }
+
     }
 }

@@ -1,7 +1,9 @@
 package com.example.foodrecipes;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,12 +13,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.example.foodrecipes.LoginController.favorites;
 import static com.example.foodrecipes.LoginController.user;
@@ -27,8 +29,15 @@ public class FavoritesController {
 
     @FXML
     private VBox vbxContent;
+    @FXML
+    void goToHome(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
 
     ArrayList<Recipes> recipes = new ArrayList<>();
+
 
 
     public void addContent(){
@@ -37,7 +46,7 @@ public class FavoritesController {
         for (String str: recipeIds) {
             DataBaseConnection connectNow = new DataBaseConnection();
             Connection connectDB = connectNow.getConnection();
-            String getRecipes = "SELECT * FROM recipes WHERE RecipeId =  '" + str + "'";
+            String getRecipes = "SELECT * FROM recipes WHERE recipe_id =  '" + str + "'";
             try {
                 Statement statement = connectDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(getRecipes);
@@ -99,46 +108,41 @@ public class FavoritesController {
             im.setTranslateX(580);
             vBox.getChildren().add(im);
             final boolean bool = false;
-//            vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-//                if (LoginController.user != null) {
-//                    // ImageView imageView2 = (ImageView)e.getSource();
-//                    VBox box = (VBox) e.getSource();
-//                    HBox box2 = (HBox) box.getChildren().get(0);
-//                    Label label = (Label) box2.getChildren().get(0);
-//                    String foodName = label.getText();
-//                    int id = findId(foodName);
-//                    if (id == -1) {
-//                        System.err.println("Cannot found name");
-//                    } else {
-//                        DataBaseConnection connectNow = new DataBaseConnection();
-//                        Connection connectDB = connectNow.getConnection();
-//                        try {
-//                            String recipeIds = "";
-//                            Statement statement = connectDB.createStatement();
-//                            String qry = "SELECT recipeIds FROM favorites WHERE favId = "+ user.getFavId() +";";
-//                            ResultSet queryResult = statement.executeQuery(qry);
-//                            while (queryResult.next()){
-//                                recipeIds += queryResult.getObject(1).toString();
-//                            }
-//                            if(recipeIds.contains(String.valueOf(id))){
-//                                System.out.println("is already fav");
-//                            } else {
-//                                String query = "UPDATE favorites SET recipeIds = CONCAT(recipeIds, '"+ id +" ') WHERE favId = "+ user.getFavId() +";";
-//                                statement.executeUpdate(query);
-//                            }
-//                        } catch (Exception exp) {
-//                            exp.printStackTrace();
-//                            exp.getCause();
-//                        }
-//
-//                    }
-//                    String path = !bool ? "img/star-filled.png" : "img/star.png";
-//                    Image image = new Image(getClass().getResourceAsStream(path));
-//                    im.setImage(image);
-//                    im.setFitWidth(20);
-//                    im.setFitHeight(20);
-//                }
-//            });
+            vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                if (LoginController.user != null) {
+                    // ImageView imageView2 = (ImageView)e.getSource();
+                    VBox box = (VBox) e.getSource();
+                    HBox box2 = (HBox) box.getChildren().get(0);
+                    Label label = (Label) box2.getChildren().get(0);
+                    String foodName = label.getText();
+                    int id = recipeController.findId(foodName);
+                    if (id == -1) {
+                        System.err.println("Cannot found name");
+                    } else {
+                        DataBaseConnection connectNow = new DataBaseConnection();
+                        Connection connectDB = connectNow.getConnection();
+                        try {
+                            Statement statement = connectDB.createStatement();
+                                String query = "UPDATE favorites SET recipe_ids = REPLACE(recipe_ids,  ' "+ id +" ', ' ') WHERE fav_id = "+ user.getFavId() +";";
+                                statement.executeUpdate(query);
+                                String getRecipeIds = "SELECT recipe_ids FROM favorites WHERE fav_id = " + user.getFavId()  + ";";
+                                ResultSet queryResult = statement.executeQuery(getRecipeIds);
+                            while (queryResult.next()) {
+                                favorites.setRecipe((String) queryResult.getObject(1));
+                            }
+                        } catch (Exception exp) {
+                            exp.printStackTrace();
+                            exp.getCause();
+                        }
+
+                    }
+                    String path = !bool ? "img/star.png" : "img/star-filled.png";
+                    Image image = new Image(getClass().getResourceAsStream(path));
+                    im.setImage(image);
+                    im.setFitWidth(20);
+                    im.setFitHeight(20);
+                }
+            });
             VBox vb = new VBox();
             vb.setStyle("-fx-border-radius:10px;-fx-border-width:5px;-fx-border-color:#DAD9D9;");
             vb.getChildren().add(vBox);

@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -44,7 +46,7 @@ public class LoginController {
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "SELECT * FROM users WHERE username =  '" + username + "' AND password = '"
+        String verifyLogin = "SELECT * FROM users WHERE username =  '" + username + "' AND PASSWORD = '"
                 + password + "'";
         try {
             Statement statement = connectDB.createStatement();
@@ -59,6 +61,7 @@ public class LoginController {
                     wrongLogin.setText("Sign in Successful");
                     wrongLogin.setStyle("-fx-text-fill: green");
                     user = temp;
+                    changeLoginButton();
                     getFavObject();
                 } else {
                     wrongLogin.setText("Wrong Name or Password!!");
@@ -72,11 +75,18 @@ public class LoginController {
         }
     }
 
+    private void changeLoginButton() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+        fxmlLoader.load();
+        RecipeController rc = fxmlLoader.getController();
+        rc.initialize();
+    }
+
     private void getFavObject() {
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "SELECT * FROM favorites WHERE favId = " + user.getFavId()  + ";";
+        String verifyLogin = "SELECT * FROM favorites WHERE fav_Id = " + user.getFavId()  + ";";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);

@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="580.0" maxWidth="800.0" prefHeight="580.0" prefWidth="800.0" style="-fx-background-color: dad9d9;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.foodrecipes.RecipeController">
    <top>
-      <HBox prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: E58412;" BorderPane.alignment="CENTER">
+      <HBox fx:id="upBox" prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: E58412;" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="66.0" prefWidth="599.0" style="-fx-padding: 10px; -fx-font-size: 30px; -fx-background-color: E58412;" text="FoodRecipes" textFill="WHITE">
                <font>

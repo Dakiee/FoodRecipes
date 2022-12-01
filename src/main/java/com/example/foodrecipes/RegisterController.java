@@ -57,8 +57,8 @@ public class RegisterController {
 
         if (isPasswordValid(password)) {
             Date date = new Date();
-            String selectFavId = "SELECT favId FROM favorites WHERE dates = '" + date + "';";
-            String addFavorites = "INSERT INTO `favorites`( `dates`, `recipeIds`) VALUES ('" + date + "',' ')";
+            String selectFavId = "SELECT fav_Id FROM favorites WHERE dates = '" + date + "';";
+            String addFavorites = "INSERT INTO `favorites`( `dates`, `recipe_ids`) VALUES ('" + date + "',' ')";
             int favId = -1;
             try {
                 Statement statement = connectDB.createStatement();
@@ -67,7 +67,7 @@ public class RegisterController {
                 while (queryResult.next()) {
                     favId = queryResult.getInt(1);
                 }
-                String insertFields = "INSERT INTO users(username, PASSWORD,favId) VALUES ('";
+                String insertFields = "INSERT INTO users(username, PASSWORD,fav_id) VALUES ('";
                 String insertValues = username + "','" + password + "','" + favId + "');";
                 String insertToRegister = insertFields + insertValues;
                 statement.executeUpdate(insertToRegister);
