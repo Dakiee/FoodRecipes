@@ -1,0 +1,33 @@
+StackPane{
+    -fx-padding: 10px, 10px, 10px, 10px;
+    -fx-background-color: #808080;
+    -fx-pref-width: auto;
+    -fx-pref-height: auto;
+}
+BorderPane{
+    -fx-font-style: SansSerif;
+    -fx-font-size: 14px;
+    -fx-pref-width: auto;
+    -fx-pref-height: auto;
+}
+VBox{
+    -fx-spacing: 10px;
+    -fx-start-margin: auto;
+}
+HBox{
+    -fx-spacing: 10px;
+    -fx-start-margin: auto;
+}
+.button{
+    -fx-background-color:  #3ACECE;
+    -fx-min-height:  30px;
+}
+.header{
+    -fx-font-style: SansSerif;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 30px;
+}
+.image{
+    -fx-pref-width: auto;
+    -fx-pref-height: auto;
+}

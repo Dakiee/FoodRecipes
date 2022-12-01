@@ -349,7 +349,7 @@ public class RecipeController {
         public void handle(MouseEvent e) {
 
             ImageView imageView = (ImageView) e.getSource();
-            Image image = new Image(getClass().getResourceAsStream("img/star-filled.png"));
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/star-filled.png")));
             imageView.setImage(image);
             imageView.setFitWidth(20);
             imageView.setFitHeight(20);
