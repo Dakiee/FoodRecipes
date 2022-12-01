@@ -23,7 +23,7 @@ public class Favorites {
         this.recipe = recipe;
     }
 
-    public String  getDate() {
+    public String getDate() {
         return date;
     }
 

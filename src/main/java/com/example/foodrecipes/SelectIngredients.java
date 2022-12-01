@@ -88,23 +88,15 @@ public class SelectIngredients {
             hbox.setStyle("-fx-border:1px;-fx-border-color:lightgray;-fx-border-radius:10px;" +
                     "-fx-background-color:white;");
             hbox.setId(ing);
-
             Label label = new Label(ing);
             label.setStyle("-fx-padding: 5px;-fx-font-size: 16px;");
-
             Image image = new Image(new FileInputStream("src/main/java/IngredientIcons/" + ing + ".png"));
             ImageView imageView = new ImageView(image);
-
             imageView.setFitHeight(20);
             imageView.setFitWidth(20);
-
             hbox.setAlignment(Pos.CENTER);
-
-            // Registering the event filter
             hbox.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-
             hbox.getChildren().addAll(imageView, label);
-
             allIngredients.getChildren().add(hbox);
         }
 
