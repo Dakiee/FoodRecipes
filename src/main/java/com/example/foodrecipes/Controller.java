@@ -205,9 +205,19 @@ public class Controller {
                         DataBaseConnection connectNow = new DataBaseConnection();
                         Connection connectDB = connectNow.getConnection();
                         try {
+                            String recipeIds = "";
                             Statement statement = connectDB.createStatement();
-                            String query = "UPDATE favorites SET recipeIds = CONCAT(recipeIds, '"+ id +" ') WHERE favId = 1;";
-                            statement.executeUpdate(query);
+                            String qry = "SELECT recipeIds FROM favorites WHERE favId = 1;";
+                            ResultSet queryResult = statement.executeQuery(qry);
+                            while (queryResult.next()){
+                                recipeIds += queryResult.getObject(1).toString();
+                            }
+                            if(recipeIds.contains(String.valueOf(id))){
+                                System.out.println("is already fav");
+                            } else {
+                                String query = "UPDATE favorites SET recipeIds = CONCAT(recipeIds, '"+ id +" ') WHERE favId = 1;";
+                                statement.executeUpdate(query);
+                            }
                         } catch (Exception exp) {
                             exp.printStackTrace();
                             exp.getCause();
