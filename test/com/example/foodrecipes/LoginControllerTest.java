@@ -9,7 +9,7 @@ class LoginControllerTest {
     @Test
     void testValidateLogin() {
         LoginController temp = new LoginController();
-//        Boolean temp2 = temp.validateLogin("dakie","123");
-//        assertEquals(true, temp2);
+        temp.validateLogin("dakie","Dakie123");
+        assertEquals(null, LoginController.user);
     }
 }

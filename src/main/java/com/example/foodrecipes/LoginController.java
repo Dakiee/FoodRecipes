@@ -42,7 +42,7 @@ public class LoginController {
     private Label wrongLogin;
 
     @FXML
-    void btnSign(ActionEvent event) throws InterruptedException {
+    void btnSign(ActionEvent event) {
         if (!tfUsername.getText().isBlank() && !tfPassword.getText().isBlank()) {
             validateLogin(tfUsername.getText(), tfPassword.getText());
         } else {
@@ -110,6 +110,7 @@ public class LoginController {
                 temp.setRecipe((String) queryResult.getObject(3));
                 favorites = temp;
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
