@@ -16,7 +16,8 @@ public class RecipeApplication extends Application {
 
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(570);
-        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
+        primaryStage.getIcons()
+                .add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
 
         primaryStage.setTitle("FoodRecipes");
         primaryStage.setScene(new Scene(root, 800, 570));

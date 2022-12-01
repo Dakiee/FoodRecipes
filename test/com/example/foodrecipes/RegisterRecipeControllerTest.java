@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RegisterControllerTest {
+class RegisterRecipeControllerTest {
 
     @Test
     void testIsPasswordValid() {
         RegisterController test = new RegisterController();
-        Boolean temp = test.isPasswordValid("Suganii us");
+        Boolean temp = test.isPasswordValid("Password123");
         assertEquals(false, temp);
     }
 }

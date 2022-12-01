@@ -30,11 +30,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.jar.JarEntry;
 
 import static com.example.foodrecipes.LoginController.test;
 
-public class Controller {
+public class RecipeController {
     @FXML
     private HBox ingredients;
     @FXML
@@ -64,7 +63,7 @@ public class Controller {
      * @param event
      */
     @FXML
-    void onOpenFavorites(ActionEvent event) throws IOException{
+    void onOpenFavorites(ActionEvent event) throws IOException {
         System.out.println(test);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favorites.fxml"));
         Parent parent = fxmlLoader.load();
@@ -72,7 +71,6 @@ public class Controller {
         Scene scene = new Scene(parent, 800, 570);
         Stage stage = new Stage();
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
-
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
@@ -85,14 +83,12 @@ public class Controller {
      */
     @FXML
     void onFindClicked(ActionEvent event) {
-        if(!(selected == null || selected.isEmpty())) {
+        if (!(selected == null || selected.isEmpty())) {
             recipes.clear();
             DataBaseConnection connectNow = new DataBaseConnection();
             Connection connectDB = connectNow.getConnection();
             StringBuffer sb = new StringBuffer();
             for (Node obj : selected) {
-//            sb.append(obj.getId() + " ");
-
                 String verifyLogin = "SELECT ingredientsId FROM ingredients WHERE name =  '" + obj.getId() + "'";
                 try {
                     Statement statement = connectDB.createStatement();
@@ -108,15 +104,13 @@ public class Controller {
             ArrayList<String> cond = new ArrayList<>(List.of(sb.toString().split(" ")));
             StringBuffer buf = new StringBuffer();
 
-
             for (int i = 0; i < cond.size(); i++) {
-                if(i == cond.size()-1)
+                if (i == cond.size() - 1)
                     buf.append("ingIds LIKE '% " + cond.get(i) + " %'");
                 else
                     buf.append("ingIds LIKE '% " + cond.get(i) + " %' OR ");
             }
             System.out.println(buf);
-
 
             String food = "SELECT * FROM recipes WHERE " + buf;
             System.out.println(food);
@@ -150,7 +144,7 @@ public class Controller {
     private void createRecipeBox() {
         double y = 0;
         hola.getChildren().clear();
-        for (Recipes r: recipes) {
+        for (Recipes r : recipes) {
             Image[] icons = getImage(r);
             VBox vBox = new VBox();
             HBox hBox = new HBox();
@@ -162,7 +156,7 @@ public class Controller {
             ImageView[] imageView = new ImageView[icons.length];
             HBox imageHBox = new HBox();
             for (int i = 0; i < icons.length; i++) {
-                imageView[i] =  new ImageView(icons[i]);
+                imageView[i] = new ImageView(icons[i]);
                 imageView[i].setFitWidth(25);
                 imageView[i].setFitHeight(25);
                 imageHBox.getChildren().add(imageView[i]);
@@ -173,12 +167,11 @@ public class Controller {
             HBox desc = new HBox(rDescription);
             rDescription.setWrappingWidth(685);
 
-//            rDescription.setMaxWidth(720);
             vBox.getChildren().add(hBox);
             vBox.getChildren().add(desc);
 
             vBox.setMinHeight(Region.USE_PREF_SIZE);
-            vBox.setPadding(new Insets(5,10,5,10));
+            vBox.setPadding(new Insets(5, 10, 5, 10));
             vBox.setStyle("-fx-background-color:#DAD9D9;");
 
             vBox.setPrefWidth(300);
@@ -192,8 +185,8 @@ public class Controller {
             vBox.getChildren().add(im);
             final boolean bool = false;
             vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-                if(test) {
-//                ImageView imageView2 = (ImageView)e.getSource();
+                if (test) {
+                    // ImageView imageView2 = (ImageView)e.getSource();
                     VBox box = (VBox) e.getSource();
                     HBox box2 = (HBox) box.getChildren().get(0);
                     Label label = (Label) box2.getChildren().get(0);
@@ -234,9 +227,9 @@ public class Controller {
             VBox vb = new VBox();
             vb.setStyle("-fx-border-radius:10px;-fx-border-width:5px;-fx-border-color:#DAD9D9;");
             vb.getChildren().add(vBox);
-//            vb.getChildren().add(im);
+            // vb.getChildren().add(im);
             hola.getChildren().add(vb);
-            hola.setPadding(new Insets(10,10,0,10));
+            hola.setPadding(new Insets(10, 10, 0, 10));
             hola.setSpacing(10);
 
             hola.setMinHeight(2000);
@@ -251,21 +244,20 @@ public class Controller {
         int id = -1;
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
-            String verifyLogin = "SELECT RecipeId FROM recipes WHERE RecipeName =  '" + foodName + "'";
+        String verifyLogin = "SELECT RecipeId FROM recipes WHERE RecipeName =  '" + foodName + "'";
         System.out.println(verifyLogin);
-            try {
-                Statement statement = connectDB.createStatement();
-                ResultSet queryResult = statement.executeQuery(verifyLogin);
-                while (queryResult.next()) {
-                    id = queryResult.getInt(1);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                e.getCause();
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(verifyLogin);
+            while (queryResult.next()) {
+                id = queryResult.getInt(1);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
         return id;
     }
-
 
     /**
      *
@@ -285,7 +277,8 @@ public class Controller {
                 Statement statement = connectDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(verifyLogin);
                 while (queryResult.next()) {
-                    Image image = new Image(new FileInputStream("src/main/java/IngredientIcons/"+queryResult.getObject(1)+".png"));
+                    Image image = new Image(
+                            new FileInputStream("src/main/java/IngredientIcons/" + queryResult.getObject(1) + ".png"));
                     images[i] = image;
                 }
             } catch (Exception e) {
@@ -313,7 +306,6 @@ public class Controller {
         Stage stage = new Stage();
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
 
-
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
@@ -327,7 +319,8 @@ public class Controller {
     private boolean isInList(String id) {
 
         for (int i = 0; i < ingredients.getChildren().size(); i++) {
-            if (ingredients.getChildren().get(i).getId().equals(id)) return true;
+            if (ingredients.getChildren().get(i).getId().equals(id))
+                return true;
         }
         return false;
     }
@@ -339,7 +332,7 @@ public class Controller {
         @Override
         public void handle(MouseEvent e) {
 
-            HBox hbox = (HBox)e.getSource();
+            HBox hbox = (HBox) e.getSource();
 
             hbox.setStyle("-fx-border:1px;-fx-border-color:rgb(255, 102, 102);-fx-border-radius:10px;" +
                     "-fx-background-color:rgb(255, 102, 102);");
@@ -354,19 +347,18 @@ public class Controller {
         @Override
         public void handle(MouseEvent e) {
 
-            ImageView imageView = (ImageView)e.getSource();
+            ImageView imageView = (ImageView) e.getSource();
             Image image = new Image(getClass().getResourceAsStream("img/star-filled.png"));
             imageView.setImage(image);
             imageView.setFitWidth(20);
             imageView.setFitHeight(20);
 
-//            hbox.setStyle("-fx-border:1px;-fx-border-color:rgb(255, 102, 102);-fx-border-radius:10px;" +
-//                    "-fx-background-color:rgb(255, 102, 102);");
+            // hbox.setStyle("-fx-border:1px;-fx-border-color:rgb(255, 102,
+            // 102);-fx-border-radius:10px;" +
+            // "-fx-background-color:rgb(255, 102, 102);");
             // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
-
-
 
     /**
      *
@@ -375,7 +367,7 @@ public class Controller {
         @Override
         public void handle(MouseEvent e) {
 
-            HBox hbox = (HBox)e.getSource();
+            HBox hbox = (HBox) e.getSource();
 
             hbox.setStyle("-fx-border:1px;-fx-border-color:#E58412;-fx-border-radius:10px;" +
                     "-fx-background-color:white;");
@@ -390,18 +382,18 @@ public class Controller {
         @Override
         public void handle(MouseEvent e) {
 
-            HBox hbox = (HBox)e.getSource();
+            HBox hbox = (HBox) e.getSource();
             ingredients.getChildren().remove(hbox);
             selected.remove(hbox);
 
-
-            //System.out.println(hbox.getParent().getChildrenUnmodifiable().toString());
+            // System.out.println(hbox.getParent().getChildrenUnmodifiable().toString());
             // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
 
     /**
      * author: Dalai
+     * 
      * @param event
      * @throws IOException
      */
@@ -409,9 +401,9 @@ public class Controller {
     void addIngredient(ActionEvent event) throws IOException {
         selected = onOpenDialog();
         System.out.println(selected);
-        if(!spAdded) {
+        if (!spAdded) {
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-            spAdded=true;
+            spAdded = true;
         }
 
         for (Node ing : selected) {
@@ -419,30 +411,31 @@ public class Controller {
             String id = ing.getId();
             HBox test = (HBox) ing;
             test.setMinWidth(Region.USE_PREF_SIZE);
-            test.setPadding(new Insets(0,2,0,2));
+            test.setPadding(new Insets(0, 2, 0, 2));
             if (!isInList(id)) {
-//                ing.minWidth(300);
-//                ing.prefWidth(300);
-//                ing.maxWidth(300);
-//                ing.setStyle("-fx-padding: 2px;");
+                // ing.minWidth(300);
+                // ing.prefWidth(300);
+                // ing.maxWidth(300);
+                // ing.setStyle("-fx-padding: 2px;");
 
-
-//                comp.addUserIngredient(ing.getId());
-                test.addEventFilter(MouseEvent.MOUSE_ENTERED,mouseEnter);
-                test.addEventFilter(MouseEvent.MOUSE_EXITED,mouseExit);
-                test.addEventFilter(MouseEvent.MOUSE_CLICKED,mouseClick);
+                // comp.addUserIngredient(ing.getId());
+                test.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEnter);
+                test.addEventFilter(MouseEvent.MOUSE_EXITED, mouseExit);
+                test.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseClick);
 
                 ingredients.getChildren().add(test);
                 ingredients.setSpacing(1);
-                ingredients.setPadding(new Insets(3,0,0,3));
+                ingredients.setPadding(new Insets(3, 0, 0, 3));
 
-            } else System.out.println("Item is in list");
+            } else
+                System.out.println("Item is in list");
 
             scrollPane.setContent(ingredients);
 
         }
 
     }
+
     @FXML
     private ArrayList<Node> onOpenDialog() throws IOException {
         ingredients.getChildren().clear();
@@ -451,7 +444,6 @@ public class Controller {
         SelectIngredients dialogController = fxmlLoader.getController();
         // dialogController.setAppMainObservableList(tvObservableList);
 
-
         dialogController.FillIngredients();
 
         Scene scene = new Scene(parent, 700, 570);
@@ -459,11 +451,10 @@ public class Controller {
         stage.setMinWidth(600);
         stage.setMinHeight(600);
 
-
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
-        //return parent.getChildrenUnmodifiable().toString();
+        // return parent.getChildrenUnmodifiable().toString();
 
         EventHandler handler = dialogController.getEventHandler();
         //
@@ -475,5 +466,3 @@ public class Controller {
         return temporary;
     }
 }
-
-
