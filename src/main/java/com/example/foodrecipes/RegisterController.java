@@ -77,6 +77,7 @@ public class RegisterController {
                 e.getCause();
             }
         } else {
+            lblRegistrationMessage.setStyle("-fx-text-fill: red");
             lblRegistrationMessage.setText("Password Not Valid");
         }
     }
