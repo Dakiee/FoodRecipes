@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class LoginController {
 
-    static Boolean test = false;
+    static Users user;
     @FXML
     private PasswordField tfPassword;
 
@@ -42,20 +42,24 @@ public class LoginController {
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "SELECT count(1) FROM users WHERE username =  '" + username + "' AND password = '"
+        String verifyLogin = "SELECT * FROM users WHERE username =  '" + username + "' AND password = '"
                 + password + "'";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while (queryResult.next()) {
-                if (queryResult.getInt(1) == 1) {
+                    Users temp = new Users();
+                temp.setUserId((Integer) queryResult.getObject(1));
+                temp.setUserName((String) queryResult.getObject(2));
+                temp.setPassword((String) queryResult.getObject(3));
+                temp.setFavId((Integer) queryResult.getObject(4));
+                if (temp.getUserName().matches(username)) {
                     wrongLogin.setText("Sign in Successful");
                     wrongLogin.setStyle("-fx-text-fill: green");
-                    test = true;
+                    user = temp;
                 } else {
                     wrongLogin.setText("Wrong Name or Password!!");
                     wrongLogin.setStyle("-fx-text-fill: red");
-                    test = false;
                 }
             }
 
