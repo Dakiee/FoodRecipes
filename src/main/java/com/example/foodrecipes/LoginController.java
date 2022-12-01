@@ -15,11 +15,13 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Objects;
 
 public class LoginController {
 
     static Users user;
+    static Favorites favorites;
     @FXML
     private PasswordField tfPassword;
 
@@ -57,6 +59,7 @@ public class LoginController {
                     wrongLogin.setText("Sign in Successful");
                     wrongLogin.setStyle("-fx-text-fill: green");
                     user = temp;
+                    getFavObject();
                 } else {
                     wrongLogin.setText("Wrong Name or Password!!");
                     wrongLogin.setStyle("-fx-text-fill: red");
@@ -67,6 +70,29 @@ public class LoginController {
             e.printStackTrace();
             e.getCause();
         }
+    }
+
+    private void getFavObject() {
+        DataBaseConnection connectNow = new DataBaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        String verifyLogin = "SELECT * FROM favorites WHERE favId = " + user.getFavId()  + ";";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(verifyLogin);
+            while (queryResult.next()) {
+                Favorites temp = new Favorites();
+                temp.setId((Integer) queryResult.getObject(1));
+                temp.setDate(queryResult.getObject(2).toString());
+                temp.setRecipe((String) queryResult.getObject(3));
+                favorites = temp;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
     }
 
     public void createAccountForm(MouseEvent mouseEvent) {

@@ -10,8 +10,8 @@ public class DataBaseConnection {
         String databaseName = "food_db";
         String databaseUser = "root";
         String databasePassword = "";
-//         String url = "jdbc:mysql://localhost:3307/" + databaseName;
-        String url = "jdbc:mysql://localhost/" + databaseName;
+         String url = "jdbc:mysql://localhost:3307/" + databaseName;
+//        String url = "jdbc:mysql://localhost/" + databaseName;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

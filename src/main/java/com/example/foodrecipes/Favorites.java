@@ -5,7 +5,7 @@ import java.util.Date;
 public class Favorites {
     private Integer id;
     private String recipe;
-    private Date date;
+    private String date;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,20 @@ public class Favorites {
         this.recipe = recipe;
     }
 
-    public Date getDate() {
+    public String  getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Favorites{" +
+                "id=" + id +
+                ", recipe='" + recipe + '\'' +
+                ", date=" + date +
+                '}';
     }
 }

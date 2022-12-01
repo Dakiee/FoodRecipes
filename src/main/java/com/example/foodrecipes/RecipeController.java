@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.foodrecipes.LoginController.favorites;
 import static com.example.foodrecipes.LoginController.user;
 
 public class RecipeController {
@@ -68,6 +69,8 @@ public class RecipeController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("favorites.fxml"));
             Parent parent = fxmlLoader.load();
 
+            FavoritesController favoritesController = fxmlLoader.getController();
+            favoritesController.addContent();
             Scene scene = new Scene(parent, 800, 570);
             Stage stage = new Stage();
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
@@ -75,7 +78,7 @@ public class RecipeController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.showAndWait();
-            System.out.println(selected);
+            System.out.println(favorites);
         }
     }
 
@@ -201,7 +204,7 @@ public class RecipeController {
                         try {
                             String recipeIds = "";
                             Statement statement = connectDB.createStatement();
-                            String qry = "SELECT recipeIds FROM favorites WHERE favId = 1;";
+                            String qry = "SELECT recipeIds FROM favorites WHERE favId = "+ user.getFavId() +";";
                             ResultSet queryResult = statement.executeQuery(qry);
                             while (queryResult.next()){
                                 recipeIds += queryResult.getObject(1).toString();
@@ -209,7 +212,7 @@ public class RecipeController {
                             if(recipeIds.contains(String.valueOf(id))){
                                 System.out.println("is already fav");
                             } else {
-                                String query = "UPDATE favorites SET recipeIds = CONCAT(recipeIds, '"+ id +" ') WHERE favId = 1;";
+                                String query = "UPDATE favorites SET recipeIds = CONCAT(recipeIds, '"+ id +" ') WHERE favId = "+ user.getFavId() +";";
                                 statement.executeUpdate(query);
                             }
                         } catch (Exception exp) {
@@ -228,7 +231,6 @@ public class RecipeController {
             VBox vb = new VBox();
             vb.setStyle("-fx-border-radius:10px;-fx-border-width:5px;-fx-border-color:#DAD9D9;");
             vb.getChildren().add(vBox);
-            // vb.getChildren().add(im);
             hola.getChildren().add(vb);
             hola.setPadding(new Insets(10, 10, 0, 10));
             hola.setSpacing(10);
@@ -265,7 +267,7 @@ public class RecipeController {
      * @param r
      * @return
      */
-    private Image[] getImage(Recipes r) {
+    public Image[] getImage(Recipes r) {
         String[] imageNum;
         imageNum = r.getIngIds().split(" ");
         Image[] images = new Image[imageNum.length];
