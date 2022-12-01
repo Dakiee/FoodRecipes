@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Objects;
 
 public class LoginController {
@@ -52,7 +51,7 @@ public class LoginController {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while (queryResult.next()) {
-                    Users temp = new Users();
+                Users temp = new Users();
                 temp.setUserId((Integer) queryResult.getObject(1));
                 temp.setUserName((String) queryResult.getObject(2));
                 temp.setPassword((String) queryResult.getObject(3));
@@ -61,6 +60,7 @@ public class LoginController {
                     wrongLogin.setText("Sign in Successful");
                     wrongLogin.setStyle("-fx-text-fill: green");
                     user = temp;
+
                     changeLoginButton();
                     getFavObject();
                 } else {
@@ -86,7 +86,7 @@ public class LoginController {
         DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "SELECT * FROM favorites WHERE fav_Id = " + user.getFavId()  + ";";
+        String verifyLogin = "SELECT * FROM favorites WHERE fav_Id = " + user.getFavId() + ";";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);

@@ -1,6 +1,5 @@
 package com.example.foodrecipes;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -29,6 +28,8 @@ public class FavoritesController {
 
     @FXML
     private VBox vbxContent;
+    ArrayList<Recipes> recipes = new ArrayList<>();
+
     @FXML
     void goToHome(MouseEvent event) {
         Node source = (Node) event.getSource();
@@ -36,14 +37,10 @@ public class FavoritesController {
         stage.close();
     }
 
-    ArrayList<Recipes> recipes = new ArrayList<>();
-
-
-
-    public void addContent(){
+    public void addContent() {
         String ids = LoginController.favorites.getRecipe();
         String[] recipeIds = ids.split(" ");
-        for (String str: recipeIds) {
+        for (String str : recipeIds) {
             DataBaseConnection connectNow = new DataBaseConnection();
             Connection connectDB = connectNow.getConnection();
             String getRecipes = "SELECT * FROM recipes WHERE recipe_id =  '" + str + "'";
@@ -57,8 +54,6 @@ public class FavoritesController {
                     recipe.setCookTime(queryResult.getObject(3).toString());
                     recipe.setIngIds(queryResult.getObject(4).toString());
                     recipe.setDescription(queryResult.getObject(6).toString());
-
-                    System.out.println(recipe);
                     recipes.add(recipe);
                 }
             } catch (Exception e) {
@@ -102,7 +97,6 @@ public class FavoritesController {
             vBox.setMaxWidth(300);
             Image img = new Image(getClass().getResourceAsStream("img/star-filled.png"));
             ImageView im = new ImageView(img);
-//            im.addEventFilter(MouseEvent.MOUSE_CLICKED, starClicked);
             im.setFitHeight(20);
             im.setFitWidth(20);
             im.setTranslateX(580);
@@ -110,7 +104,6 @@ public class FavoritesController {
             final boolean bool = false;
             vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
                 if (LoginController.user != null) {
-                    // ImageView imageView2 = (ImageView)e.getSource();
                     VBox box = (VBox) e.getSource();
                     HBox box2 = (HBox) box.getChildren().get(0);
                     Label label = (Label) box2.getChildren().get(0);
@@ -123,10 +116,12 @@ public class FavoritesController {
                         Connection connectDB = connectNow.getConnection();
                         try {
                             Statement statement = connectDB.createStatement();
-                                String query = "UPDATE favorites SET recipe_ids = REPLACE(recipe_ids,  ' "+ id +" ', ' ') WHERE fav_id = "+ user.getFavId() +";";
-                                statement.executeUpdate(query);
-                                String getRecipeIds = "SELECT recipe_ids FROM favorites WHERE fav_id = " + user.getFavId()  + ";";
-                                ResultSet queryResult = statement.executeQuery(getRecipeIds);
+                            String query = "UPDATE favorites SET recipe_ids = REPLACE(recipe_ids,  ' " + id
+                                    + " ', ' ') WHERE fav_id = " + user.getFavId() + ";";
+                            statement.executeUpdate(query);
+                            String getRecipeIds = "SELECT recipe_ids FROM favorites WHERE fav_id = " + user.getFavId()
+                                    + ";";
+                            ResultSet queryResult = statement.executeQuery(getRecipeIds);
                             while (queryResult.next()) {
                                 favorites.setRecipe((String) queryResult.getObject(1));
                             }
@@ -156,7 +151,5 @@ public class FavoritesController {
         }
 
     }
-
-
 
 }

@@ -36,11 +36,30 @@ import java.util.Objects;
 import static com.example.foodrecipes.LoginController.favorites;
 import static com.example.foodrecipes.LoginController.user;
 
+/**
+ * @author : Dalai
+ * @version : 1.0.0
+ * @date : 2022:11:20
+ * @improvement : Icon, FXML Load, Link Login
+ *
+ * @version 1.0.1
+ * @date : 2022:11:22
+ * @improvement : List Delete
+ *
+ * @version 1.0.2
+ * @date : 2022:11:24
+ * @improvement query change
+ *
+ * @version 1.0.3
+ * @date : 2022:11:27
+ * @improvement Oldson hailtaa list hiideg bolov
+ */
+
 public class RecipeController {
     @FXML
     private HBox ingredients;
     @FXML
-    private VBox hola;
+    private VBox vbContent;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -49,20 +68,19 @@ public class RecipeController {
     private HBox upBox;
     @FXML
     private Button btnFavorites;
-
     @FXML
-    private Button add;
+    private Button btnAdd;
     @FXML
-    private ScrollPane sp2;
+    private ScrollPane btmScrollPane;
     @FXML
-    private Button login_btn;
+    private Button btnLogin;
     @FXML
     private Button find_btn;
     private boolean spAdded = false;
     ArrayList<Recipes> recipes = new ArrayList<>();
 
     @FXML
-    void initialize(){
+    void initialize() {
         changeLoginBtn(user == null);
         System.out.println("bandi");
     }
@@ -72,12 +90,12 @@ public class RecipeController {
      */
     @FXML
     void onOpenFavorites(ActionEvent event) throws IOException {
-        if(user != null) {
+        if (user != null) {
             DataBaseConnection connectNow = new DataBaseConnection();
             Connection connectDB = connectNow.getConnection();
             try {
                 Statement statement = connectDB.createStatement();
-                String getRecipeIds = "SELECT recipe_ids FROM favorites WHERE fav_id = " + user.getFavId()  + ";";
+                String getRecipeIds = "SELECT recipe_ids FROM favorites WHERE fav_id = " + user.getFavId() + ";";
                 ResultSet queryResult = statement.executeQuery(getRecipeIds);
                 while (queryResult.next()) {
                     favorites.setRecipe((String) queryResult.getObject(1));
@@ -94,7 +112,8 @@ public class RecipeController {
 
             Scene scene = new Scene(parent, 800, 570);
             Stage stage = new Stage();
-            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
+            stage.getIcons()
+                    .add(new Image(Objects.requireNonNull(getClass().getResource("img/favicon.png")).openStream()));
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -103,20 +122,11 @@ public class RecipeController {
         }
     }
 
-    double sceneWidth;
-    double sceneHeight;
-
     /**
      * @param event
      */
     @FXML
     void onFindClicked(ActionEvent event) {
-
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        sceneWidth = stage.getWidth();
-        sceneHeight = stage.getHeight();
-
         if (!(selected == null || selected.isEmpty())) {
             recipes.clear();
             DataBaseConnection connectNow = new DataBaseConnection();
@@ -144,7 +154,6 @@ public class RecipeController {
                 else
                     buf.append("ing_ids LIKE '% " + cond.get(i) + " %' OR ");
             }
-            System.out.println(buf);
 
             String food = "SELECT * FROM recipes WHERE " + buf;
             System.out.println(food);
@@ -171,12 +180,12 @@ public class RecipeController {
         }
 
     }
+
     /**
      *
      */
     private void createRecipeBox() {
-        double y = 0;
-        hola.getChildren().clear();
+        vbContent.getChildren().clear();
         for (Recipes r : recipes) {
             Image[] icons = getImage(r);
             VBox vBox = new VBox();
@@ -219,7 +228,6 @@ public class RecipeController {
             final boolean bool = false;
             vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
                 if (LoginController.user != null) {
-                    // ImageView imageView2 = (ImageView)e.getSource();
                     VBox box = (VBox) e.getSource();
                     HBox box2 = (HBox) box.getChildren().get(0);
                     Label label = (Label) box2.getChildren().get(0);
@@ -233,15 +241,16 @@ public class RecipeController {
                         try {
                             String recipeIds = "";
                             Statement statement = connectDB.createStatement();
-                            String qry = "SELECT recipe_ids FROM favorites WHERE fav_id = "+ user.getFavId() +";";
+                            String qry = "SELECT recipe_ids FROM favorites WHERE fav_id = " + user.getFavId() + ";";
                             ResultSet queryResult = statement.executeQuery(qry);
-                            while (queryResult.next()){
+                            while (queryResult.next()) {
                                 recipeIds += queryResult.getObject(1).toString();
                             }
-                            if(recipeIds.contains(String.valueOf(id))){
+                            if (recipeIds.contains(String.valueOf(id))) {
                                 System.out.println("is already fav");
                             } else {
-                                String query = "UPDATE favorites SET recipe_ids = CONCAT(recipe_ids, '"+ id +" ') WHERE fav_id = "+ user.getFavId() +";";
+                                String query = "UPDATE favorites SET recipe_ids = CONCAT(recipe_ids, '" + id
+                                        + " ') WHERE fav_id = " + user.getFavId() + ";";
                                 statement.executeUpdate(query);
                             }
                         } catch (Exception exp) {
@@ -260,16 +269,16 @@ public class RecipeController {
             VBox vb = new VBox();
             vb.setStyle("-fx-border-radius:10px;-fx-border-width:5px;-fx-border-color:#DAD9D9;");
             vb.getChildren().add(vBox);
-            hola.getChildren().add(vb);
-            hola.setPadding(new Insets(10, 10, 0, 10));
-            hola.setSpacing(10);
+            vbContent.getChildren().add(vb);
+            vbContent.setPadding(new Insets(10, 10, 0, 10));
+            vbContent.setSpacing(10);
 
-            hola.setMinHeight(2000);
-            hola.setPrefWidth(730);
-            hola.setMaxWidth(730);
+            vbContent.setMinHeight(2000);
+            vbContent.setPrefWidth(730);
+            vbContent.setMaxWidth(730);
         }
-        sp2.setContent(hola);
-        sp2.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        btmScrollPane.setContent(vbContent);
+        btmScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
     public int findId(String foodName) {
@@ -384,11 +393,6 @@ public class RecipeController {
             imageView.setImage(image);
             imageView.setFitWidth(20);
             imageView.setFitHeight(20);
-
-            // hbox.setStyle("-fx-border:1px;-fx-border-color:rgb(255, 102,
-            // 102);-fx-border-radius:10px;" +
-            // "-fx-background-color:rgb(255, 102, 102);");
-            // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
 
@@ -403,8 +407,6 @@ public class RecipeController {
 
             hbox.setStyle("-fx-border:1px;-fx-border-color:#E58412;-fx-border-radius:10px;" +
                     "-fx-background-color:white;");
-
-            // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
     /**
@@ -417,9 +419,6 @@ public class RecipeController {
             HBox hbox = (HBox) e.getSource();
             ingredients.getChildren().remove(hbox);
             selected.remove(hbox);
-
-            // System.out.println(hbox.getParent().getChildrenUnmodifiable().toString());
-            // hbox.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
         }
     };
 
@@ -445,12 +444,6 @@ public class RecipeController {
             test.setMinWidth(Region.USE_PREF_SIZE);
             test.setPadding(new Insets(0, 2, 0, 2));
             if (!isInList(id)) {
-                // ing.minWidth(300);
-                // ing.prefWidth(300);
-                // ing.maxWidth(300);
-                // ing.setStyle("-fx-padding: 2px;");
-
-                // comp.addUserIngredient(ing.getId());
                 test.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEnter);
                 test.addEventFilter(MouseEvent.MOUSE_EXITED, mouseExit);
                 test.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseClick);
@@ -474,32 +467,25 @@ public class RecipeController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addIngredients.fxml"));
         Parent parent = fxmlLoader.load();
         SelectIngredients dialogController = fxmlLoader.getController();
-        // dialogController.setAppMainObservableList(tvObservableList);
-
         dialogController.FillIngredients();
-
         Scene scene = new Scene(parent, 700, 570);
         Stage stage = new Stage();
         stage.setMinWidth(600);
         stage.setMinHeight(600);
-
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
-        // return parent.getChildrenUnmodifiable().toString();
-
         EventHandler handler = dialogController.getEventHandler();
-        //
-
         ArrayList<Node> temporary = new ArrayList<>(dialogController.getSelected());
         for (Node ing : temporary) {
             ing.removeEventFilter(MouseEvent.MOUSE_CLICKED, handler);
         }
         return temporary;
     }
-    void changeLoginBtn(boolean b){
-            Button button = (Button) upBox.getChildren().get(2);
-        if(b){
+
+    void changeLoginBtn(boolean b) {
+        Button button = (Button) upBox.getChildren().get(2);
+        if (b) {
             button.setText("Login");
         } else {
             button.setText("Log out");

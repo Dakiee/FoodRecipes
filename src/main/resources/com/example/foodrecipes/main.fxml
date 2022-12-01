@@ -29,7 +29,7 @@
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="login_btn" mnemonicParsing="false" onAction="#onOpenLogin" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #4DAFE7; -fx-border-width: 1px; -fx-border-color: #4DAFE7; -fx-border-radius: 10px;" text="Login" textFill="WHITE">
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#onOpenLogin" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: #4DAFE7; -fx-border-width: 1px; -fx-border-color: #4DAFE7; -fx-border-radius: 10px;" text="Login" textFill="WHITE">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
@@ -53,7 +53,7 @@
                         <Insets />
                      </HBox.margin>
                   </ScrollPane>
-                  <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#addIngredient" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #3ACECE; -fx-min-height: 30px;" text="Add an ingredient" textFill="WHITE" HBox.hgrow="NEVER">
+                  <Button fx:id="btnAdd" alignment="CENTER" mnemonicParsing="false" onAction="#addIngredient" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #3ACECE; -fx-min-height: 30px;" text="Add an ingredient" textFill="WHITE" HBox.hgrow="NEVER">
                      <font>
                         <Font name="SansSerif Bold" size="12.0" />
                      </font>
@@ -79,9 +79,9 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 10;">
                <children>
-                  <ScrollPane fx:id="sp2" hbarPolicy="NEVER" maxHeight="700.0" maxWidth="780.0" minHeight="0.0" minWidth="610.0" prefHeight="372.0" prefWidth="760.0" style="-fx-background: white; -fx-border-color: white;" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="btmScrollPane" hbarPolicy="NEVER" maxHeight="700.0" maxWidth="780.0" minHeight="0.0" minWidth="610.0" prefHeight="372.0" prefWidth="760.0" style="-fx-background: white; -fx-border-color: white;" vbarPolicy="NEVER">
                      <content>
-                        <VBox fx:id="hola" minHeight="350.0" minWidth="734.0" prefHeight="375.0" prefWidth="734.0" style="-fx-background-color: white;">
+                        <VBox fx:id="vbContent" minHeight="350.0" minWidth="734.0" prefHeight="375.0" prefWidth="734.0" style="-fx-background-color: white;">
                            <children>
                               <HBox fx:id="ingredients" maxHeight="0.0" maxWidth="807.0" prefHeight="0.0" prefWidth="638.0" />
                               <ImageView fitHeight="327.0" fitWidth="341.0" pickOnBounds="true" preserveRatio="true" translateX="200.0" translateY="5.0">
