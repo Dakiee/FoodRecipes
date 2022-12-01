@@ -1,6 +1,6 @@
 package com.example.foodrecipes;
 
-import javafx.collections.FXCollections;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,7 +29,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,8 +62,9 @@ public class RecipeController {
 
     @FXML
     void initialize(){
-        changeLoginBtn(user == null);
-        System.out.println("bandi");
+        boolean bool;
+        bool = user == null;
+        changeLoginBtn(bool);
     }
 
     /**
@@ -499,11 +499,13 @@ public class RecipeController {
     }
     void changeLoginBtn(boolean b){
             Button button = (Button) upBox.getChildren().get(2);
+        SimpleStringProperty sp = new SimpleStringProperty();
+            button.textProperty().bind(sp);
         if(b){
-            button.setText("Login");
+            sp.setValue("Login");
         } else {
-            button.setText("Log out");
+            sp.setValue("Log out");
         }
-
+//        button.setText(sp.getValue());
     }
 }
