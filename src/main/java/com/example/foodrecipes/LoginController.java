@@ -84,9 +84,13 @@ public class LoginController {
         }
     }
 
-    private void changeLoginButton() throws IOException {
+    private void changeLoginButton() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-        fxmlLoader.load();
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         RecipeController rc = fxmlLoader.getController();
         rc.initialize();
     }

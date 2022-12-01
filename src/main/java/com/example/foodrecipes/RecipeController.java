@@ -1,6 +1,6 @@
 package com.example.foodrecipes;
 
-import javafx.collections.FXCollections;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,7 +29,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,14 +77,16 @@ public class RecipeController {
     private Button find_btn;
     private boolean spAdded = false;
     ArrayList<Recipes> recipes = new ArrayList<>();
+    ArrayList<Node> selected;
 
     @FXML
     void initialize() {
         changeLoginBtn(user == null);
-        System.out.println("bandi");
     }
 
     /**
+     *
+     * Database ees recipe uudiin id-g awan favorite stage iig neeh method
      * @param event
      */
     @FXML
@@ -123,6 +124,10 @@ public class RecipeController {
     }
 
     /**
+     *
+     * Find button iig darah uyd ajillah method
+     * selected geh arraylist deh utguudaar database ees recipes iin ogogdliig hain oldson utgiig butsaaj delgetslene
+     * herew selected-d utga baihgui bol yuch hiihgui
      * @param event
      */
     @FXML
@@ -182,7 +187,7 @@ public class RecipeController {
     }
 
     /**
-     *
+     * Recipe object uudiig box dotor hiij delgetslene
      */
     private void createRecipeBox() {
         vbContent.getChildren().clear();
@@ -281,6 +286,13 @@ public class RecipeController {
         btmScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
+
+    /**
+     * Nereer recipe id-g butsaah method
+     *
+     * @param foodName - hoolnii ner
+     * @return - nereer olson hoolnii id-g butsaana
+     */
     public int findId(String foodName) {
         int id = -1;
         DataBaseConnection connectNow = new DataBaseConnection();
@@ -301,9 +313,10 @@ public class RecipeController {
     }
 
     /**
+     * Hoolnii ortsnii zurguudiig butsaah method
      *
-     * @param r
-     * @return
+     * @param r - hoolnii object
+     * @return - hoolnii ortsnii zurguudiig butsaana
      */
     public Image[] getImage(Recipes r) {
         String[] imageNum;
@@ -331,7 +344,7 @@ public class RecipeController {
         return images;
     }
 
-    ArrayList<Node> selected;
+
 
     /**
      *
@@ -482,7 +495,6 @@ public class RecipeController {
         }
         return temporary;
     }
-
     void changeLoginBtn(boolean b) {
         Button button = (Button) upBox.getChildren().get(2);
         if (b) {
@@ -490,6 +502,6 @@ public class RecipeController {
         } else {
             button.setText("Log out");
         }
-
+//        button.setText(sp.getValue());
     }
 }
