@@ -55,7 +55,7 @@ public class RegisterController {
         String username = tfUsername.getText();
         String password = setPasswordField.getText();
 
-        if (!isPasswordValid(password)) {
+        if (isPasswordValid(password)) {
             Date date = new Date();
             String selectFavId = "SELECT favId FROM favorites WHERE dates = '" + date + "';";
             String addFavorites = "INSERT INTO `favorites`( `dates`, `recipeIds`) VALUES ('" + date + "',' ')";
@@ -82,10 +82,7 @@ public class RegisterController {
     }
 
     boolean isPasswordValid(String password) {
-        String regex = "^(?=.*[0-9])\"\n" +
-                " + \"(?=.*[a-z])(?=.*[A-Z])\"\n" +
-                " + \"(?=.*[@#$%^&+=])\"\n" +
-                "  + \"(?=\\\\S+$).{8,20}$";
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
